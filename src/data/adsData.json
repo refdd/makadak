@@ -1,0 +1,8 @@
+{
+    "vehicles": ["/imgs/vehicles/1.png", "/imgs/vehicles/2.jpg", "/imgs/vehicles/3.jpg" ],
+    "realestate": ["/imgs/realestate/1.jpg", "/imgs/realestate/2.jpg", "/imgs/realestate/3.jpg" ],
+    "collectibles": ["/imgs/collectibles/1.jpg", "/imgs/collectibles/2.jpg", "/imgs/collectibles/3.jpg" ],
+    "others": ["/imgs/others/1.jpg", "/imgs/others/2.jpg", "/imgs/others/3.jpg" ],
+    "electronics": ["/imgs/electronics/1.jpg", "/imgs/electronics/2.jpg", "/imgs/electronics/3.jpg" ],
+    "lifestyle": ["/imgs/lifestyle/1.jpg", "/imgs/lifestyle/2.jpg", "/imgs/lifestyle/3.jpg" ]
+}

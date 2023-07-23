@@ -1,0 +1,32 @@
+[
+    {
+      "id":1,
+      "property":"Make",
+      "valueOf":"Bentley"
+    },
+    {
+      "id":2,
+      "property":"Model",
+      "valueOf":"Bentley"
+    },
+    {
+      "id":3,
+      "property":"Kilometers",
+      "valueOf":"Bentley"
+    },
+    {
+      "id":4,
+      "property":"Year",
+      "valueOf":"Bentley"
+    },
+    {
+      "id":5,
+      "property":"Fuel Type",
+      "valueOf":"Diesel"
+    },
+    {
+      "id":6,
+      "property":"Transmission",
+      "valueOf":"Automatic"
+    }
+  ]

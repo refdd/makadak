@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "lotTitle":"Lot 1",
+        "title": "luxury Car",
+        "description": "2020 Flying Spur Mulliner",
+        "image":"https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "price": "1,000,000",
+        "currency": "SAR"
+    },
+    {
+        "id":2,
+        "lotTitle":"Lot 2",
+        "title": "luxury Car",
+        "description": "2020 Flying Spur Mulliner",
+        "image":"https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "price": "1,000,000",
+        "currency": "SAR"
+    },
+    {
+        "id":3,
+        "lotTitle":"Lot 3",
+        "title": "luxury Car",
+        "description": "2020 Flying Spur Mulliner",
+        "image":"https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "price": "1,000,000",
+        "currency": "SAR"
+    },
+    {
+        "id":4,
+        "lotTitle":"Lot 4",
+        "title": "luxury Car",
+        "description": "2020 Flying Spur Mulliner",
+        "image":"https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "price": "1,000,000",
+        "currency": "SAR"
+    },
+    {
+        "id":5,
+        "lotTitle":"Lot 5",
+        "title": "luxury Car",
+        "description": "2020 Flying Spur Mulliner",
+        "image":"https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "price": "1,000,000",
+        "currency": "SAR"
+    }
+]

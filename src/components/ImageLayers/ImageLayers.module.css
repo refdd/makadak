@@ -1,0 +1,21 @@
+img.img {
+    height: 185;
+    border-radius: 8px;
+    max-height: 100%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  .big-box {
+    display: flex;
+  }
+  .img-box {
+    position: relative;
+    display: flex;
+  }
+  .img-box:not(:first-of-type) {
+    position: relative;
+    top: 0;
+    bottom: auto;
+    margin: auto;
+  }
+  

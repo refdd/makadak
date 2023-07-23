@@ -1,0 +1,22 @@
+[
+    {"subcatId":0, "catId":0, "subcatName": "cars", "label": "Cars"},
+    {"subcatId":1, "catId":0, "subcatName": "motorbikes", "label": "Motorbikes"},
+    {"subcatId":2, "catId":0, "subcatName": "heavy_machinery", "label": "Heavy Machinery"},
+    {"subcatId":3, "catId":0, "subcatName": "watercrafts", "label": "Watercrafts"},
+    {"subcatId":4, "catId":0, "subcatName": "aircrafts", "label": "Aircrafts"},
+    {"subcatId":0, "catId":1, "subcatName": "phones", "label": "Phones"},
+    {"subcatId":1, "catId":1, "subcatName": "computers", "label": "Computers"},
+    {"subcatId":2, "catId":1, "subcatName": "smart_watch", "label": "Smart Watch"},
+    {"subcatId":0, "catId":2, "subcatName": "coins", "label": "Coins"},
+    {"subcatId":1, "catId":2, "subcatName": "stamps", "label": "Stamps"},
+    {"subcatId":2, "catId":2, "subcatName": "antiques", "label": "Antiques"},
+    {"subcatId":0, "catId":3, "subcatName": "commercial", "label": "Commercial"},
+    {"subcatId":1, "catId":3, "subcatName": "vacant_land", "label": "Vacant land"},
+    {"subcatId":2, "catId":3, "subcatName": "residential", "label": "Residential"},
+    {"subcatId":0, "catId":4, "subcatName": "watches", "label": "Watches"},
+    {"subcatId":1, "catId":4, "subcatName": "glasses", "label": "Glasses"},
+    {"subcatId":2, "catId":4, "subcatName": "clothes", "label": "Clothes"},
+    {"subcatId":0, "catId":5, "subcatName": "carplates", "label": "Car Plates"},
+    {"subcatId":1, "catId":5, "subcatName": "animals", "label": "Animals"},
+    {"subcatId":2, "catId":5, "subcatName": "pens", "label": "Pens"}
+]

@@ -1,0 +1,8 @@
+[
+    {"catId":0, "catName": "vehicles"},
+    {"catId":1, "catName": "electronics"},
+    {"catId":2, "catName": "collectibles"},
+    {"catId":3, "catName": "realestate"},
+    {"catId":4, "catName": "lifestyle"},
+    {"catId":5, "catName": "others"}
+]

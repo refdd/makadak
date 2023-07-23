@@ -1,0 +1,191 @@
+@font-face {
+  font-family: Montserrat;
+  src: url("/fonts/Montserrat-Regular.ttf");
+  format: ("ttf");
+  font-display: swap;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url("/fonts/Montserrat-Medium.ttf");
+  format: ("ttf");
+  font-display: swap;
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url("/fonts/Montserrat-SemiBold.ttf");
+  format: ("ttf");
+  font-display: swap;
+  font-weight: 600;
+}
+
+.dot.active {
+  background-color: white
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url("/fonts/Montserrat-Bold.ttf");
+  format: ("ttf");
+  font-display: swap;
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url("/fonts/Montserrat-ExtraBold.ttf");
+  format: ("ttf");
+  font-display: swap;
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url("/fonts/Montserrat-Black.ttf");
+  format: ("ttf");
+  font-display: swap;
+  font-weight: 900;
+}
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+* {
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  /* background: #fff; */
+  /* height: calc((100% - 30px) / 2) !important; */
+  margin-top: 0rem !important;
+}
+
+.swiper-wrapper {
+  flex-direction: inherit;
+}
+
+.c2c .swiper-wrapper {
+  flex-direction: inherit;
+  justify-content: center;
+}
+
+@media only screen and (max-width: 700px) {
+  .c2c .swiper-wrapper {
+    flex-direction: inherit;
+    justify-content: normal
+  }
+}
+
+.swiper.margin-top .swiper-wrapper {
+  margin-top: 1rem;
+}
+
+.swiper-slide img {
+  /* display: block; */
+  /* width: 100%; */
+  /* height: 100%; */
+  /* object-fit: cover; */
+}
+
+.swiper-button-prev::after {
+  color: whitesmoke !important;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  font-size: 20px !important;
+}
+
+.swiper-button-next::after {
+  color: whitesmoke !important;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+  width: 10px !important;
+  font-size: 20px !important;
+}
+
+.one-line,
+.two-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.two-line {
+  -webkit-line-clamp: 2;
+}
+
+.object-fit {
+  object-fit: cover;
+}
+
+.radius-8 {
+  border-radius: 8px;
+}
+
+.h-auto {
+  height: auto;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+#input-without-arrows::-webkit-inner-spin-button,
+#input-without-arrows::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.swiper-pagination-bullet {
+  background: black !important
+}
+
+.full-width {
+  width: 100%;
+}
+
+
+.is-sticky {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  animation: 500ms ease-in-out 0s normal none 1 running fadeInDown;
+  background: black;
+}
+
+video::-webkit-media-controls {
+  display:none !important;
+}
+
+
+video::-webkit-media-controls-enclosure {
+  display:none !important;
+}
+
+::-webkit-media-controls {
+  display:none !important;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
