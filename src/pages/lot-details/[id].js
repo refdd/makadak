@@ -610,12 +610,13 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
                           <Grid
                             item
                             fontWeight={200}
-                            fontSize={14}
+                            fontSize={18}
                             textAlign={"center"}
                             my={1}
                           >
                             Starting bid
-                            <Typography>
+                            <Typography fontWeight={700} fontSize={20}>
+                              {auctionDetails?.startingPrice?.currency?.code}{" "}
                               {auctionDetails?.startingPrice?.amount}
                             </Typography>
                           </Grid>
