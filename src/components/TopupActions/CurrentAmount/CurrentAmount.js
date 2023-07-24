@@ -7,16 +7,13 @@ export default function CurrentAmount({ action, highestOffer }) {
       <Typography variant="body2" fontWeight="bold">
         {action === "offer" ? `Current highest offer` : `HIGHEST BID`}
       </Typography>
-      {(
+      {
         <Typography variant="h4" marginTop={0.5} fontWeight="bold">
-          {
-            highestOffer?.amount ?
-              highestOffer?.currency?.code + ' ' + highestOffer?.amount
-              :
-              '---'
-          }
+          {highestOffer?.amount
+            ? highestOffer?.currency?.code + " " + highestOffer?.amount
+            : "---"}
         </Typography>
-      )}
+      }
     </Box>
   );
 }

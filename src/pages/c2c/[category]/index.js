@@ -29,14 +29,15 @@ const C2CCategory = ({
   vehicleMakes,
   locations,
 }) => {
-
   const [file, setFile] = useState(
     auctionDetails?.mediaPhotos?.map((img) => img.url) || []
   );
   const [editMode, setEditMode] = useState(false);
   const { formState } = useSelector((state) => state.c2c);
   const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
-  const [checkoutMode, setCheckoutMode] = useState(categoryId == '1' ? "report" : 'success');
+  const [checkoutMode, setCheckoutMode] = useState(
+    categoryId == "1" ? "report" : "success"
+  );
   const [storeReportQ] = useStoreInspectionReportMutation();
   const imageMapper = auctionDetails?.mediaPhotos?.reduce((acc, img) => {
     acc[img.url] = img.id;
@@ -72,23 +73,43 @@ const C2CCategory = ({
   const onCreatAuction = async () => {
     let formDataApi = {};
     const mappings = [
-      { key: "make", newKey: "vehicleMakeId", getValue: value => value?.id },
-      { key: "model", newKey: "vehicleModelId", getValue: value => value?.id },
-      { key: "year", newKey: "vehicleYear", getValue: value => value?.id },
+      { key: "make", newKey: "vehicleMakeId", getValue: (value) => value?.id },
+      {
+        key: "model",
+        newKey: "vehicleModelId",
+        getValue: (value) => value?.id,
+      },
+      { key: "year", newKey: "vehicleYear", getValue: (value) => value?.id },
       { key: "companyVatNumber", newKey: "companyVatNo" },
-      { key: "exteriorColor", newKey: "vehicleColor", getValue: value => value?.id },
-      { key: "interiorColor", newKey: "insideColor", getValue: value => value?.id },
-      { key: "itemLocation", newKey: "countryId", getValue: value => value?.id },
-      { key: "km", newKey: "mileage", getValue: value => value?.id },
+      {
+        key: "exteriorColor",
+        newKey: "vehicleColor",
+        getValue: (value) => value?.id,
+      },
+      {
+        key: "interiorColor",
+        newKey: "insideColor",
+        getValue: (value) => value?.id,
+      },
+      {
+        key: "itemLocation",
+        newKey: "countryId",
+        getValue: (value) => value?.id,
+      },
+      { key: "km", newKey: "mileage", getValue: (value) => value?.id },
       { key: "reservePrice", newKey: "reservedPrice" },
-      { key: "transmission", newKey: "vehicleTransmission", getValue: value => value?.id },
+      {
+        key: "transmission",
+        newKey: "vehicleTransmission",
+        getValue: (value) => value?.id,
+      },
     ];
 
     Object.entries(formState).forEach(([key, value]) => {
       let _key = key;
       let _value = value;
 
-      const mapping = mappings.find(mapping => mapping.key === key);
+      const mapping = mappings.find((mapping) => mapping.key === key);
       if (mapping) {
         _key = mapping.newKey;
         _value = mapping.getValue ? mapping.getValue(value) : value;
@@ -99,42 +120,49 @@ const C2CCategory = ({
       }
 
       formDataApi[_key] = _value;
-
     });
-    if (formState.saleType === 'auction' && !formDataApi['reservedPrice'])
-      return alert('please fill vehicle price')
+    if (formState.saleType === "auction" && !formDataApi["reservedPrice"])
+      return alert("please fill vehicle price");
 
-    if (formState.saleType === 'sale' && !formDataApi['vehiclePrice'])
-      return alert('please fill vehicle price')
+    if (formState.saleType === "sale" && !formDataApi["vehiclePrice"])
+      return alert("please fill vehicle price");
 
     formDataApi.auctionVehicleTypeId = categoryId;
-    const accessToken = cookieCutter.get('accessToken');
-    const headers = { Authorization: `Bearer ${accessToken}` }
+    const accessToken = cookieCutter.get("accessToken");
+    const headers = { Authorization: `Bearer ${accessToken}` };
 
-    await fetchApi({ url: `auction-vehicles/${auctionId}`, method: "PATCH", data: formDataApi, headers }, true);
-  }
+    await fetchApi(
+      {
+        url: `auction-vehicles/${auctionId}`,
+        method: "PATCH",
+        data: formDataApi,
+        headers,
+      },
+      true
+    );
+  };
 
   const storeInspectionReport = async () => {
-    storeReportQ({ auctionId }).unwrap()
-      .then(res => {
-        setReportData(res)
-        setCheckoutMode('report');
+    storeReportQ({ auctionId })
+      .unwrap()
+      .then((res) => {
+        setReportData(res);
+        setCheckoutMode("report");
         setCheckoutModalOpen(true);
-      }).catch(e => {
-        console.log(e);
-
       })
-  }
+      .catch((e) => {
+        console.log(e);
+      });
+  };
   const handleFormContinue = async (open) => {
     await onCreatAuction();
-    if (categoryId == '1') {
+    if (categoryId == "1") {
       await storeInspectionReport();
-    }
-    else {
-      setCheckoutMode('success');
+    } else {
+      setCheckoutMode("success");
       setCheckoutModalOpen(open);
     }
-  }
+  };
   const handleCheckout = (mode) => {
     setCheckoutMode(mode);
   };
@@ -142,16 +170,18 @@ const C2CCategory = ({
   const [reportData, setReportData] = useState();
   const handleFinishWithdraw = async () => {
     router.push("/account");
-  }
+  };
 
   const checkoutComponents = {
-    report: <AdditionalFeatures
-      categoryId={categoryId}
-      formState={formState}
-      handleCheckout={handleCheckout}
-      auctionId={auctionId}
-      data={reportData?.length && reportData[0]}
-    />,
+    report: (
+      <AdditionalFeatures
+        categoryId={categoryId}
+        formState={formState}
+        handleCheckout={handleCheckout}
+        auctionId={auctionId}
+        data={reportData?.length && reportData[0]}
+      />
+    ),
     success: (
       <PostCompleteSuccess handleFinishWithdraw={handleFinishWithdraw} />
     ),
@@ -161,7 +191,7 @@ const C2CCategory = ({
         auctionId={auctionId}
         categoryId={categoryId}
         report={reportData?.length && reportData[0]}
-        handleTopup={() => handleCheckout('success')}
+        handleTopup={() => handleCheckout("success")}
       />
     ),
   };

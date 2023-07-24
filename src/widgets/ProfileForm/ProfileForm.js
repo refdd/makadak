@@ -35,11 +35,8 @@ const ProfileForm = ({
   errors,
   getCountriesQuery,
   getRegionsQuery,
-  getCitiesQuery
+  getCitiesQuery,
 }) => {
-
-
-
   const imageRef = useRef(null);
   const [imageSrc, setImageSrc] = useState("/imgs/profpic.svg");
 
@@ -58,9 +55,7 @@ const ProfileForm = ({
 
   useEffect(() => {
     setCities(getCitiesQuery?.data?.data);
-  }, [profileData?.regionState, getCitiesQuery])
-
-
+  }, [profileData?.regionState, getCitiesQuery]);
 
   const onUpload = (image) => {
     const reader = new FileReader();
@@ -73,38 +68,37 @@ const ProfileForm = ({
     <Formik onSubmit={handleUpdate}>
       {(props) => {
         return (
-          <Grid container padding={{ sm: 3 }} spacing={4} pb={10} width={{ sm: '100%', lg: '80%', xl: '70%' }} margin={'auto'}>
-            <Grid item xs={12} sm={6} margin={'auto'}>
+          <Grid
+            container
+            padding={{ sm: 3 }}
+            spacing={4}
+            pb={10}
+            width={{ sm: "100%", lg: "80%", xl: "70%" }}
+            margin={"auto"}
+          >
+            <Grid item xs={12} sm={6} margin={"auto"}>
               <Grid item xs={12}>
                 <Grid
                   container
                   flex
                   flexDirection={"column"}
-                // alignItems={"center"}
+                  // alignItems={"center"}
                 >
-                  <Grid
-                    item
-                    pb={3}
-                    container
-                    alignItems="center"
-                  >
+                  <Grid item pb={3} container alignItems="center">
                     <Grid item xs={12}>
                       <Link href={"/auth"} style={{ textDecoration: "none" }}>
                         <Grid container alignItems="center">
-                          <ArrowBackIosIcon
-                            fontSize="small"
-                            color="primary"
-                          />
+                          <ArrowBackIosIcon fontSize="small" color="primary" />
                           <Typography color="primary">Back</Typography>
                         </Grid>
                       </Link>
                     </Grid>
                     <Grid item xs={12}>
                       <Typography
-                        width={'80%'}
+                        width={"80%"}
                         variant="inherit"
                         fontWeight="bold"
-                        textAlign={'center'}
+                        textAlign={"center"}
                       >
                         Sign up
                       </Typography>
@@ -113,8 +107,8 @@ const ProfileForm = ({
                   <div
                     style={{
                       marginBottom: 10,
-                      width: '80%',
-                      textAlign: 'center'
+                      width: "80%",
+                      textAlign: "center",
                     }}
                   >
                     {imageSrc && (
@@ -124,7 +118,7 @@ const ProfileForm = ({
                         width={120}
                         height={120}
                         src={imageSrc}
-                        style={{ borderRadius: '50%' }}
+                        style={{ borderRadius: "50%" }}
                       />
                     )}
                   </div>
@@ -139,6 +133,7 @@ const ProfileForm = ({
                   label={"First Name"}
                   error={errors.firstName}
                   helperTxt={errors.firstName}
+                  required
                 />
               </Grid>
 
@@ -150,6 +145,7 @@ const ProfileForm = ({
                   label={"Last Name"}
                   error={errors.lastName}
                   helperTxt={errors.lastName}
+                  required
                 />
               </Grid>
 
@@ -185,6 +181,7 @@ const ProfileForm = ({
                   label={"Email"}
                   error={errors.email}
                   helperTxt={errors.email}
+                  required
                 />
               </Grid>
 
@@ -197,8 +194,12 @@ const ProfileForm = ({
                   label={"Password"}
                   error={errors.password}
                   helperTxt={errors.password}
+                  required
                 />
-                <Typography p={1} fontSize={'0.75rem'} >Please use at least 8 characters, one number, one uppercase letter,  and one lowercase letter.</Typography>
+                <Typography p={1} fontSize={"0.75rem"}>
+                  Please use at least 8 characters, one number, one uppercase
+                  letter, and one lowercase letter.
+                </Typography>
               </Grid>
 
               <Grid item xs={10} sm={10} md={10} lg={10}>
@@ -210,6 +211,7 @@ const ProfileForm = ({
                   error={errors.mobile}
                   prefix="+966"
                   helperTxt={errors.mobile}
+                  required
                 />
               </Grid>
 
@@ -221,35 +223,36 @@ const ProfileForm = ({
                   label={"Address"}
                   error={errors.address}
                   helperTxt={errors.address}
+                  required
                 />
               </Grid>
 
               <Grid item xs={10} sm={10} md={10} lg={10} my={{ xs: 1 }}>
-                <InputLabel sx={{ color: 'white' }}>Country</InputLabel>
+                <InputLabel sx={{ color: "white" }}>Country</InputLabel>
                 <Select
-                  sx={{ width: '100%' }}
+                  sx={{ width: "100%" }}
                   name="country"
                   label="Country"
                   variant="outlined"
                   onChange={handleInputChange}
                   value={profileData.country}
                   error={errors.country}
+                  inputProps={{ required: true }}
                 >
-                  {
-                    countries && countries.map((country) => (
+                  {countries &&
+                    countries.map((country) => (
                       <MenuItem key={country.id} value={country.id}>
                         {country.name}
                       </MenuItem>
-                    ))
-                  }
+                    ))}
                 </Select>
                 <FormHelperText error>{errors.country}</FormHelperText>
               </Grid>
 
               <Grid item xs={10} sm={10} md={10} lg={10} my={{ xs: 1 }}>
-                <InputLabel sx={{ color: 'white' }}>Region</InputLabel>
+                <InputLabel sx={{ color: "white" }}>Region</InputLabel>
                 <Select
-                  sx={{ width: '100%' }}
+                  sx={{ width: "100%" }}
                   name="regionState"
                   label="Region / State"
                   variant="outlined"
@@ -257,20 +260,19 @@ const ProfileForm = ({
                   disabled={!regions?.length}
                   value={profileData.regionState}
                 >
-                  {
-                    regions && regions.map((region) => (
+                  {regions &&
+                    regions.map((region) => (
                       <MenuItem key={region.id} value={region.id}>
                         {region.name}
                       </MenuItem>
-                    ))
-                  }
+                    ))}
                 </Select>
               </Grid>
 
               <Grid item xs={10} sm={10} md={10} lg={10} my={{ xs: 1 }}>
-                <InputLabel sx={{ color: 'white' }}>City</InputLabel>
+                <InputLabel sx={{ color: "white" }}>City</InputLabel>
                 <Select
-                  sx={{ width: '100%' }}
+                  sx={{ width: "100%" }}
                   name="city"
                   label="City"
                   variant="outlined"
@@ -278,13 +280,12 @@ const ProfileForm = ({
                   disabled={!cities?.length}
                   value={profileData.city}
                 >
-                  {
-                    cities && cities.map((city) => (
+                  {cities &&
+                    cities.map((city) => (
                       <MenuItem key={city.id} value={city.id}>
                         {city.name}
                       </MenuItem>
-                    ))
-                  }
+                    ))}
                 </Select>
               </Grid>
 
@@ -319,9 +320,9 @@ const ProfileForm = ({
                   value={!!profileData.dataSharingPermission}
                 />
               </Grid>
-              <Grid item xs={10} sm={10} md={10} lg={10} my={2} width={'100%'} >
+              <Grid item xs={10} sm={10} md={10} lg={10} my={2} width={"100%"}>
                 <FormControlLabel
-                  sx={{ width: '97%' }}
+                  sx={{ width: "97%" }}
                   control={
                     <IOSSwitch
                       onChange={(e) => {
@@ -332,7 +333,7 @@ const ProfileForm = ({
                           },
                         });
                       }}
-                      sx={{ ml: 'auto' }}
+                      sx={{ ml: "auto" }}
                       checked={!!profileData.checkedTc}
                     />
                   }

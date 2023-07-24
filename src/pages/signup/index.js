@@ -6,7 +6,10 @@ import dayjs from "dayjs";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { useEmailVerificationMutation, useRegisterMutation } from "@/redux/apis/authApi";
+import {
+  useEmailVerificationMutation,
+  useRegisterMutation,
+} from "@/redux/apis/authApi";
 import { setAuth } from "@/redux/slices/auth.slice";
 import { checkIfNumber, checkPhoneNumber } from "@/lib/helpers";
 import { useGetCountriesQuery } from "@/redux/apis/locations/countries.api";
@@ -33,14 +36,16 @@ export default function Profile(props) {
     country: "",
     occupation: "",
     favouriteBankId: 1,
-    dataSharingPermission: 0
+    dataSharingPermission: 0,
   });
 
-
-  const getCountriesQuery = useGetCountriesQuery()
-  const getRegionsQuery = useGetRegionByCountryQuery({ countryId: profileData?.country });
-  const getCitiesQuery = useGetCityByRegionQuery({ regionId: profileData?.regionState })
-
+  const getCountriesQuery = useGetCountriesQuery();
+  const getRegionsQuery = useGetRegionByCountryQuery({
+    countryId: profileData?.country,
+  });
+  const getCitiesQuery = useGetCityByRegionQuery({
+    regionId: profileData?.regionState,
+  });
 
   const dispatch = useDispatch();
   const [registerQ, registerResponse] = useRegisterMutation();
@@ -48,40 +53,68 @@ export default function Profile(props) {
 
   const handleSubmit = () => {
     let validated = true;
-    Object.keys(profileData).forEach(key => {
-      if (!profileData[key] && !['occupation', 'dateOfBirth', 'city', 'regionState', 'dataSharingPermission'].includes(key)) {
-        setErrors(prevState => ({ ...prevState, [key]: 'Field is required' }))
+    const mobileRegex = /^\d{9,}$/; // Regex to match mobile number with 9 or more digits
+
+    Object.keys(profileData).forEach((key) => {
+      if (
+        !profileData[key] &&
+        ![
+          "occupation",
+          "dateOfBirth",
+          "city",
+          "regionState",
+          "dataSharingPermission",
+        ].includes(key)
+      ) {
+        setErrors((prevState) => ({
+          ...prevState,
+          [key]: "Field is required",
+        }));
         validated = validated && false;
       } else {
-        setErrors(prevState => ({ ...prevState, [key]: '' }))
+        setErrors((prevState) => ({ ...prevState, [key]: "" }));
         validated = validated && true;
       }
-    })
+    });
     // if (!checkPhoneNumber(profileData.mobile)) {
     //   setErrors(prevState => ({ ...prevState, mobile: 'Invalid phone number.' }))
     //   validated = validated && false;
     // }
-
+    if (!mobileRegex.test(profileData.mobile)) {
+      setErrors((prevState) => ({
+        ...prevState,
+        mobile: "Mobile number must have at least 9 digits.",
+      }));
+      validated = false;
+    }
     if (validated && !profileData.checkedTc) {
-      alert('You must accept the terms and conditions')
+      alert("You must accept the terms and conditions");
       return;
     }
     const updatedData = { ...profileData };
-    updatedData.country = getCountriesQuery?.data?.data?.find(el => el.id === updatedData.country)?.countryCode
+    updatedData.country = getCountriesQuery?.data?.data?.find(
+      (el) => el.id === updatedData.country
+    )?.countryCode;
     console.log(errors);
     if (validated)
-      registerQ(updatedData).unwrap()
-        .then(res => {
+      registerQ(updatedData)
+        .unwrap()
+        .then((res) => {
           dispatch(setAuth(res));
-          usrVerQ(res?.user?.id)
-          router.replace('/')
-        }).catch(err => {
-          let errMsg = err?.data?.message + ':\n' + (err?.data?.payload?.validation ? err?.data?.payload?.validation[0]?.errors[0]?.message : '');
-          if (!errMsg)
-            errMsg = 'Something went wrong'
+          usrVerQ(res?.user?.id);
+          router.replace("/");
+        })
+        .catch((err) => {
+          let errMsg =
+            err?.data?.message +
+            ":\n" +
+            (err?.data?.payload?.validation
+              ? err?.data?.payload?.validation[0]?.errors[0]?.message
+              : "");
+          if (!errMsg) errMsg = "Something went wrong";
           setErrorMessage(errMsg);
           setOpenDialog(true);
-        })
+        });
   };
   function eighteenAgo() {
     var date = new Date();
@@ -99,7 +132,7 @@ export default function Profile(props) {
       dateOfBirth: dayjs(val).format("YYYY-MM-DD"),
     }));
   };
-
+  console.log(getCountriesQuery);
   return (
     <>
       <CustomDialog

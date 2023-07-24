@@ -19,17 +19,14 @@ const CustomInput = forwardRef(
       isPasswordField = false,
       error,
       prefix = false,
+      required,
     },
     ref
   ) => {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
-      <InputMask
-        value={value}
-        onChange={handleInputChange}
-        onBlur={handleBlur}
-      >
+      <InputMask value={value} onChange={handleInputChange} onBlur={handleBlur}>
         {(inputProps) => (
           <TextField
             inputRef={ref}
@@ -38,8 +35,8 @@ const CustomInput = forwardRef(
               !isPasswordField
                 ? "text"
                 : isPasswordField && showPassword
-                  ? "text"
-                  : "password"
+                ? "text"
+                : "password"
             }
             name={name}
             fullWidth
@@ -50,7 +47,7 @@ const CustomInput = forwardRef(
             onBlur={handleBlur}
             helperText={helperTxt}
             error={error}
-            required
+            required={required}
             sx={{
               "& fieldset": {
                 borderRadius: 3,
@@ -69,21 +66,21 @@ const CustomInput = forwardRef(
                 </InputAdornment>
               ) : null,
               startAdornment:
-              prefix && typeof prefix === "string" ? (
-                <InputAdornment
-                  position="start"
-                  style={{
-                    opacity: 0.5,
-                  }}
-                >
-                  {prefix}
-                </InputAdornment>
-              ) : null,
+                prefix && typeof prefix === "string" ? (
+                  <InputAdornment
+                    position="start"
+                    style={{
+                      opacity: 0.5,
+                    }}
+                  >
+                    {prefix}
+                  </InputAdornment>
+                ) : null,
             }}
             InputLabelProps={{
               sx: {
-                color: 'white'
-              }
+                color: "white",
+              },
             }}
           />
         )}

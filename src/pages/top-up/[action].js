@@ -6,7 +6,10 @@ import TopupTitle from "@/components/TopupActions/TopupTitle/TopupTitle";
 import TopupValue from "@/components/TopupActions/TopupValue/TopupValue";
 import { checkIfNumber } from "@/lib/helpers";
 import { useMakeOfferMutation } from "@/redux/apis/auction-salesApi/buyerApi";
-import { usePlaceBidMutation, usePlaceBidwithAutoBidMutation } from "@/redux/apis/bidApi";
+import {
+  usePlaceBidMutation,
+  usePlaceBidwithAutoBidMutation,
+} from "@/redux/apis/bidApi";
 import { addOffer } from "@/redux/slices/data.slice";
 import { deductBalance } from "@/redux/slices/user.slice";
 import { Alert, Box, Button, Snackbar, TextField } from "@mui/material";
@@ -29,9 +32,14 @@ const CustomContainer = ({ children }) => {
   );
 };
 
-export default function TopUp({ type, handleTopupSuccess, auctionDetails, userBalance }) {
+export default function TopUp({
+  type,
+  handleTopupSuccess,
+  auctionDetails,
+  userBalance,
+}) {
   const router = useRouter();
-  const [action, setAction] = useState('offer');
+  const [action, setAction] = useState("offer");
   const hasMoney = userBalance?.amount >= auctionDetails?.depositAmount?.amount;
   const [inputValue, setInputValue] = useState("");
   const [hasError, setHasError] = useState(false);
@@ -43,19 +51,18 @@ export default function TopUp({ type, handleTopupSuccess, auctionDetails, userBa
   const [placeAutoBidQ] = usePlaceBidwithAutoBidMutation();
   const [snackbarState, setSnackbarState] = useState({
     open: false,
-    message: '',
-    type: 'error'
+    message: "",
+    type: "error",
   });
 
   const handleInputChange = (e) => {
     if (e.target.value === "" || checkIfNumber(e.target.value))
       setInputValue(e.target.value);
   };
-
   const onAutoBidChange = (e) => {
     if (e.target.value === "" || checkIfNumber(e.target.value))
       setMaxBid(e.target.value);
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -67,94 +74,133 @@ export default function TopUp({ type, handleTopupSuccess, auctionDetails, userBa
     if (hasMoney) {
       setSubmitted(true);
     } else {
-      router.push(`/wallet?id=${router.query.id}&amount=${auctionDetails?.depositAmount?.amount}`);
+      router.push(
+        `/wallet?id=${router.query.id}&amount=${auctionDetails?.depositAmount?.amount}`
+      );
     }
   };
 
   useEffect(() => {
-    setSubmitted(hasMoney)
-  }, [hasMoney])
+    setSubmitted(hasMoney);
+  }, [hasMoney]);
 
   useEffect(() => {
     setAction(type);
-  }, [type])
+  }, [type]);
   const handleUserConfirmation = () => {
     console.log(type);
-    if (type === 'offer')
-      makeOfferQ({ auctionVehicleId: auctionDetails.id, amount: inputValue, currencyCode: auctionDetails.currency.code }).unwrap()
-        .then(res => {
-          handleTopupSuccess()
-        }).catch(e => {
-          setSnackbarState(state => ({
+    if (type === "offer")
+      makeOfferQ({
+        auctionVehicleId: auctionDetails.id,
+        amount: inputValue,
+        currencyCode: auctionDetails.currency.code,
+      })
+        .unwrap()
+        .then((res) => {
+          handleTopupSuccess();
+        })
+        .catch((e) => {
+          setSnackbarState((state) => ({
             ...state,
             open: true,
-            message: !!e?.data?.payload?.validation?.length ? e?.data?.payload?.validation[0]?.errors[0]?.message : e.data.message
-          }))
-
-        })
-    if (type === 'bid') {
+            message: !!e?.data?.payload?.validation?.length
+              ? e?.data?.payload?.validation[0]?.errors[0]?.message
+              : e.data.message,
+          }));
+        });
+    if (type === "bid") {
       if (!!switchState) {
-        placeAutoBidQ({ auctionVehicleId: auctionDetails.id, auctionedPrice: inputValue, currencyCode: auctionDetails.currency.code, maxBidAmount: maxBid }).unwrap()
-          .then(res => {
-            handleTopupSuccess()
-          }).catch(e => {
-            setSnackbarState(state => ({
+        placeAutoBidQ({
+          auctionVehicleId: auctionDetails.id,
+          auctionedPrice: inputValue,
+          currencyCode: auctionDetails.currency.code,
+          maxBidAmount: maxBid,
+        })
+          .unwrap()
+          .then((res) => {
+            handleTopupSuccess();
+          })
+          .catch((e) => {
+            setSnackbarState((state) => ({
               ...state,
               open: true,
-              message: !!e?.data?.payload?.validation?.length ? e?.data?.payload?.validation[0]?.errors[0]?.message : e.message
-            }))
-
-          })
+              message: !!e?.data?.payload?.validation?.length
+                ? e?.data?.payload?.validation[0]?.errors[0]?.message
+                : e.message,
+            }));
+          });
       } else {
-        placeBidQ({ auctionVehicleId: auctionDetails.id, auctionedPrice: inputValue }).unwrap()
-          .then(res => {
-            handleTopupSuccess()
-          }).catch(e => {
-            setSnackbarState(state => ({
+        placeBidQ({
+          auctionVehicleId: auctionDetails.id,
+          auctionedPrice: inputValue,
+        })
+          .unwrap()
+          .then((res) => {
+            handleTopupSuccess();
+          })
+          .catch((e) => {
+            setSnackbarState((state) => ({
               ...state,
               open: true,
-              message: !!e?.data?.payload?.validation?.length ? e?.data?.payload?.validation[0]?.errors[0]?.message : e.message
-            }))
-
-          })
+              message: !!e?.data?.payload?.validation?.length
+                ? e?.data?.payload?.validation[0]?.errors[0]?.message
+                : e.message,
+            }));
+          });
       }
-
     }
     // router.replace(`/congrats?title=${action === 'bid' ? 'Bid' : 'Offer'} added successfully`);
   };
+  // console.log(auctionDetails.depositAmount);
   return (
     <Box
       sx={{
-        width: { xs: '100%', md: '100%' }
+        width: { xs: "100%", md: "100%" },
       }}
-      height={'100%'}
-      margin={'auto'}
+      height={"100%"}
+      margin={"auto"}
     >
       <CustomContainer>
-        <TopupTitle title={auctionDetails.title} downPayment={auctionDetails.depositAmount} action={action} />
+        <TopupTitle
+          title={auctionDetails.title}
+          downPayment={auctionDetails.depositAmount}
+          action={action}
+        />
       </CustomContainer>
       <Box my={3}>
-        {
-          action === 'bid' &&
-
-          <TopupTag timeRemaining={auctionDetails?.timeRemaining?.secondsLeft} action={action} />
-        }
+        {action === "bid" && (
+          <TopupTag
+            timeRemaining={auctionDetails?.timeRemaining?.secondsLeft}
+            action={action}
+          />
+        )}
       </Box>
       <CustomContainer>
-        <CurrentAmount highestOffer={auctionDetails?.highestBidPrice} action={action} />
+        {auctionDetails?.highestBidPrice && (
+          <CurrentAmount
+            highestOffer={auctionDetails?.highestBidPrice}
+            action={action}
+          />
+        )}
+
         <TopupValue
           onChange={handleInputChange}
           hasError={hasError}
           value={inputValue}
           action={action}
           minimumBid={
-            auctionDetails?.saleType === 'sale' ?
-              (auctionDetails?.highestBidPrice?.amount ? (auctionDetails?.highestBidPrice?.amount + auctionDetails?.minimumBidAmount?.amount) : auctionDetails?.minimumBidAmount?.amount) :
-              (auctionDetails?.highestBidPrice?.amount ?? auctionDetails?.startingPrice?.amount) + auctionDetails?.minimumBidAmount?.amount
+            auctionDetails?.saleType === "sale"
+              ? auctionDetails?.highestBidPrice?.amount
+                ? auctionDetails?.highestBidPrice?.amount +
+                  auctionDetails?.minimumBidAmount?.amount
+                : auctionDetails?.minimumBidAmount?.amount
+              : (auctionDetails?.highestBidPrice?.amount ??
+                  auctionDetails?.startingPrice?.amount) +
+                auctionDetails?.minimumBidAmount?.amount
           }
         />
         <TextField
-          sx={{ display: switchState ? 'block' : 'none' }}
+          sx={{ display: switchState ? "block" : "none" }}
           fullWidth
           type="number"
           label={`Your maximum bid (Required)`}
@@ -162,7 +208,7 @@ export default function TopUp({ type, handleTopupSuccess, auctionDetails, userBa
           value={maxBid}
           onChange={(e) => {
             e.preventDefault();
-            onAutoBidChange(e)
+            onAutoBidChange(e);
           }}
           InputLabelProps={{
             style: {
@@ -171,7 +217,12 @@ export default function TopUp({ type, handleTopupSuccess, auctionDetails, userBa
           }}
         />
 
-        {action === "bid" && <AutoBiddingSwitch switchState={switchState} setSwitchState={setSwitchState} />}
+        {action === "bid" && (
+          <AutoBiddingSwitch
+            switchState={switchState}
+            setSwitchState={setSwitchState}
+          />
+        )}
       </CustomContainer>
       <TopupSubmit
         depositAmount={auctionDetails?.depositAmount}
@@ -182,7 +233,7 @@ export default function TopUp({ type, handleTopupSuccess, auctionDetails, userBa
       />
       <Snackbar
         open={snackbarState.open}
-        onClose={() => setSnackbarState(state => ({ ...state, open: false }))}
+        onClose={() => setSnackbarState((state) => ({ ...state, open: false }))}
         autoHideDuration={2000}
       >
         <Alert severity={snackbarState.type}>{snackbarState.message}</Alert>

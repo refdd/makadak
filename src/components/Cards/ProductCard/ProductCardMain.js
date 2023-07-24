@@ -14,6 +14,8 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function ProductCardMain({ data }) {
+  console.log(data?.price);
+  // 'https://cdn-staging.mazadakapp.com/country-flags/sa.png'
   return (
     <Link
       href={{ pathname: data?.link }}
@@ -60,7 +62,6 @@ export default function ProductCardMain({ data }) {
           )}
         </Box>
         <CardContent sx={{ paddingRight: 0, paddingBottom: 0 }}>
-         
           <CardMetadata
             category={data?.catName}
             flag={data?.flag}
@@ -70,7 +71,7 @@ export default function ProductCardMain({ data }) {
             }}
             lot={data?.lot}
           />
-          
+
           <CardMainData
             heading={data?.title}
             tag={

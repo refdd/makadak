@@ -3,7 +3,7 @@ import { HYDRATE } from "next-redux-wrapper";
 
 export const countriesApi = createApi({
   baseQuery: fetchBaseQuery({
-    baseUrl: '/api'
+    baseUrl: "/api",
   }),
   extractRehydrationInfo(action, { reducerPath }) {
     if (action.type === HYDRATE) return action.payload[reducerPath];
@@ -14,7 +14,7 @@ export const countriesApi = createApi({
       query: () => {
         return {
           url: `/locations/countries`,
-          method: "GET"
+          method: "GET",
         };
       },
     }),
@@ -22,7 +22,10 @@ export const countriesApi = createApi({
   reducerPath: "countriesApi",
 });
 
-export const { useGetCountriesQuery , util: { getRunningQueriesThunk } } = countriesApi;
+export const {
+  useGetCountriesQuery,
+  util: { getRunningQueriesThunk },
+} = countriesApi;
 
 export const { getCountries } = countriesApi.endpoints;
 export const { endpoints, reducerPath, reducer, middleware } = countriesApi;

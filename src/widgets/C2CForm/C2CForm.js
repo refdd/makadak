@@ -18,29 +18,24 @@ import { setFormState } from "@/redux/slices/c2c.slice";
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { checkIfNumber } from "@/lib/helpers";
+import RadioOffer from "./FormComponents/RadioOffer";
 
-const C2CForm = ({
-  formState,
-  handleFormContinue,
-  locations,
-  catId
-}) => {
+const C2CForm = ({ formState, handleFormContinue, locations, catId }) => {
   const [models, setModels] = useState([]);
   const dispatch = useDispatch();
   const router = useRouter();
   const handleContinue = () => {
     if (!formValid(formState)) {
-
-    console.log(errors);
+      console.log(errors);
       return;
     }
     if (formValid(formState) && !readTC) {
-      alert('You must accept terms and conditions')
-      return
+      alert("You must accept terms and conditions");
+      return;
     }
 
-    handleFormContinue(true)
-  }
+    handleFormContinue(true);
+  };
   const {
     vehicleMakes,
     colors,
@@ -50,50 +45,65 @@ const C2CForm = ({
     fuelTypes,
     cylinders,
     conditions,
-    sellerTypes
-  } = useSelector(state => state.auth.configs);
+    sellerTypes,
+  } = useSelector((state) => state.auth.configs);
   const [readTC, setReadTC] = useState(false);
+  const [offerTC, setOfferTC] = useState(false);
   const [errors, setErrors] = useState({});
   const formValid = (values) => {
-    const filteredData = Object.fromEntries(Object.entries(values).filter(([_, v]) => v));
+    const filteredData = Object.fromEntries(
+      Object.entries(values).filter(([_, v]) => v)
+    );
     const validationObj = {
-      vehiclePrice: 'number',
-      reservedPrice: 'number',
-      title: 'required'
-    }
+      vehiclePrice: "number",
+      reservedPrice: "number",
+      title: "required",
+    };
     let validated = true;
     Object.keys(validationObj).forEach((key, i) => {
-      if (validationObj[key] === 'number' && filteredData[key]) {
+      if (validationObj[key] === "number" && filteredData[key]) {
         if (!checkIfNumber(filteredData[key])) {
-          setErrors(prevState => ({ ...prevState, [key]: 'Value must be a number' }))
-          validated = validated && false
+          setErrors((prevState) => ({
+            ...prevState,
+            [key]: "Value must be a number",
+          }));
+          validated = validated && false;
         } else {
-          setErrors(prevState => ({ ...prevState, [key]: '' }))
-          validated = validated && true
+          setErrors((prevState) => ({ ...prevState, [key]: "" }));
+          validated = validated && true;
         }
+      } else if (!filteredData[key]) {
+        if (catId !== "1" && !filteredData.title) {
+          setErrors((prevState) => ({
+            ...prevState,
+            title: "Field is required",
+          }));
+          validated = validated && false;
+        }
+        if (
+          filteredData.saleType === "auction" &&
+          !filteredData.reservedPrice
+        ) {
+          setErrors((prevState) => ({
+            ...prevState,
+            reservedPrice: "Field is required",
+          }));
+          validated = validated && false;
+        }
+        if (filteredData.saleType === "sale" && !filteredData.vehiclePrice) {
+          setErrors((prevState) => ({
+            ...prevState,
+            vehiclePrice: "Field is required",
+          }));
+          validated = validated && false;
+        }
+      } else {
+        setErrors((prevState) => ({ ...prevState, [key]: "" }));
+        validated = validated && true;
       }
-      else if (!filteredData[key]) {
-        if (catId !== '1' && !filteredData.title) {
-          setErrors(prevState => ({ ...prevState, title: 'Field is required' }))
-          validated = validated && false
-        }
-        if (filteredData.saleType === 'auction' && !filteredData.reservedPrice) {
-          setErrors(prevState => ({ ...prevState, reservedPrice: 'Field is required' }))
-          validated = validated && false
-        }
-        if (filteredData.saleType === 'sale' && !filteredData.vehiclePrice) {
-          setErrors(prevState => ({ ...prevState, vehiclePrice: 'Field is required' }))
-          validated = validated && false
-        }
-      }
-      else {
-        setErrors(prevState => ({ ...prevState, [key]: '' }))
-        validated = validated && true
-      }
-    })
+    });
     return validated;
-  }
-
+  };
 
   detailsFields.map((field) => {
     switch (field.name) {
@@ -135,15 +145,23 @@ const C2CForm = ({
     }
     if (!["make", "model"].includes(field.name)) return field;
   });
-  const renderDetailsFields = detailsFields.map(({ name, label, options }) =>
-    <CustomAutocomplete name={name} value={formState[name]} setValue={(payload) => dispatch(setFormState(payload))}
-      label={label} data={name === 'year' ? options.reverse() : options} sx={{ width: '100%', marginBottom: '1%' }} setModels={setModels}
-      key={name} />)
+  const renderDetailsFields = detailsFields.map(({ name, label, options }) => (
+    <CustomAutocomplete
+      name={name}
+      value={formState[name]}
+      setValue={(payload) => dispatch(setFormState(payload))}
+      label={label}
+      data={name === "year" ? options.reverse() : options}
+      sx={{ width: "100%", marginBottom: "1%" }}
+      setModels={setModels}
+      key={name}
+    />
+  ));
 
   const extraInfoFields = [
     { name: "interiorColor", label: "Interior Color", options: colors },
     { name: "exteriorColor", label: "Exterior Color", options: colors },
-  ]
+  ];
   const renderExtraInfoFields = extraInfoFields.map(
     ({ name, label, options }) => (
       <CustomAutocomplete
@@ -159,9 +177,21 @@ const C2CForm = ({
   );
 
   const handleSaletypeChange = (payload) => {
-    setErrors(prevState => ({ ...prevState, reservedPrice: '', vehiclePrice: '', buyNowPrice: '' }))
-    dispatch(setFormState({ ...payload, reservedPrice: '', vehiclePrice: '', buyNowPrice: '' }))
-  }
+    setErrors((prevState) => ({
+      ...prevState,
+      reservedPrice: "",
+      vehiclePrice: "",
+      buyNowPrice: "",
+    }));
+    dispatch(
+      setFormState({
+        ...payload,
+        reservedPrice: "",
+        vehiclePrice: "",
+        buyNowPrice: "",
+      })
+    );
+  };
   return (
     <Grid
       container
@@ -172,8 +202,7 @@ const C2CForm = ({
     >
       <Grid item xs={12} sm={6} margin={"auto"}>
         <Grid container flexDirection={"column"}>
-          {
-            catId == '1' &&
+          {catId == "1" && (
             <>
               <Grid item py={2} width={"100%"}>
                 <Grid container spacing={2}>
@@ -197,27 +226,26 @@ const C2CForm = ({
                     value={formState.condition}
                     setValue={(payload) => dispatch(setFormState(payload))}
                     label={"Condition"}
-                    options={
-                      conditions.map(condition => ({
-                        label: condition.name,
-                        value: condition.id
-                      }))
-                    }
+                    options={conditions.map((condition) => ({
+                      label: condition.name,
+                      value: condition.id,
+                    }))}
                   />
                 </Grid>
               </Grid>
             </>
-          }
-          {
-            catId !== '1' &&
+          )}
+          {catId !== "1" && (
             <TextField
               label="Auction Title"
               value={formState.title}
-              onChange={(e) => dispatch(setFormState({ title: e.target.value }))}
+              onChange={(e) =>
+                dispatch(setFormState({ title: e.target.value }))
+              }
               error={errors.title}
               helperText={errors.title}
             />
-          }
+          )}
 
           <Grid item my={2} position={"relative"}>
             <Grid container>
@@ -233,6 +261,7 @@ const C2CForm = ({
             saleType={formState.saleType}
             handleSaleTypeChange={(payload) => handleSaletypeChange(payload)}
           />
+          <RadioOffer errors={errors} offer={offerTC} setoffer={setOfferTC} />
           <Grid
             item
             padding={{ sm: 3 }}
@@ -246,13 +275,11 @@ const C2CForm = ({
               name={"sellerType"}
               value={formState.sellerType}
               setValue={(payload) => dispatch(setFormState(payload))}
-              options={
-                sellerTypes.map(condition => ({
-                  label: condition.name,
-                  value: condition.id,
-                  val: condition.id
-                }))
-              }
+              options={sellerTypes.map((condition) => ({
+                label: condition.name,
+                value: condition.id,
+                val: condition.id,
+              }))}
             />
           </Grid>
           {formState.sellerType === "companyWithVat" && <CompanyInfo />}
@@ -263,11 +290,13 @@ const C2CForm = ({
               errors={errors}
             />
           )}
-          {formState.saleType === "auction" && <PricingInformation
-            setFormState={(payload) => dispatch(setFormState(payload))}
-            formState={formState}
-            errors={errors}
-          />}
+          {formState.saleType === "auction" && (
+            <PricingInformation
+              setFormState={(payload) => dispatch(setFormState(payload))}
+              formState={formState}
+              errors={errors}
+            />
+          )}
           <ItemLocation
             value={formState.itemLocation}
             setValue={(payload) => {
@@ -277,7 +306,11 @@ const C2CForm = ({
             regionState={formState.regionId}
             city={formState.cityId}
           />
-          <TermsAndConditions errors={errors} read={readTC} setRead={setReadTC} />
+          <TermsAndConditions
+            errors={errors}
+            read={readTC}
+            setRead={setReadTC}
+          />
         </Grid>
         <Button
           variant="outlined"
