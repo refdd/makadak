@@ -166,6 +166,7 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
     { title: "Cylinders", path: auctionDetails?.cylinders },
   ];
 
+  // Temporary: filter all undefined details until there is a sample response of the details of other products (bid items)
   const filteredProperties = propertiesMapping.filter((p) => p.path);
 
   const renderProperties = filteredProperties.map(
