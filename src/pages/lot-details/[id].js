@@ -166,7 +166,9 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
     { title: "Cylinders", path: auctionDetails?.cylinders },
   ];
 
-  const renderProperties = propertiesMapping.map(
+  const filteredProperties = propertiesMapping.filter((p) => p.path);
+
+  const renderProperties = filteredProperties.map(
     ({ title, path }, i) =>
       (title || path) &&
       (path != null || path != "") && (
