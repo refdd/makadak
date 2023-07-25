@@ -166,7 +166,10 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
     { title: "Cylinders", path: auctionDetails?.cylinders },
   ];
 
-  const renderProperties = propertiesMapping.map(
+  // Temporary: filter all undefined details until there is a sample response of the details of other products (bid items)
+  const filteredProperties = propertiesMapping.filter((p) => p.path);
+
+  const renderProperties = filteredProperties.map(
     ({ title, path }, i) =>
       (title || path) &&
       (path != null || path != "") && (
@@ -610,12 +613,13 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
                           <Grid
                             item
                             fontWeight={200}
-                            fontSize={14}
+                            fontSize={18}
                             textAlign={"center"}
                             my={1}
                           >
                             Starting bid
-                            <Typography>
+                            <Typography fontWeight={700} fontSize={20}>
+                              {auctionDetails?.startingPrice?.currency?.code}{" "}
                               {auctionDetails?.startingPrice?.amount}
                             </Typography>
                           </Grid>
