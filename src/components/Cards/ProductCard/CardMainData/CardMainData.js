@@ -19,7 +19,7 @@ const CardMainData = ({ heading, tag }) => {
         <Typography
           fontWeight={900}
           color={"white"}
-          margin={"5px 0"}
+          margin={"5px 5px"}
           // width={'100%'}
           sx={{
             textTransform: "uppercase",

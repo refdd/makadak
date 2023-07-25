@@ -14,7 +14,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getCategoryName } from "@/lib/helpers";
 import CardMetadata from "./CardMetadata/CardMetadata";
-
+import CardMainData from "./CardMainData/CardMainData";
 export default function ProductCardSmall({ data, tag }) {
   console.log(data);
   return (
@@ -69,6 +69,10 @@ export default function ProductCardSmall({ data, tag }) {
             <Divider sx={{ borderColor: "white" }} />
           </div>
 
+          <div style={{ display: "flex", marginLeft: "10px" }}>
+            {data?.lot && <CardMainData heading={`Lot #: ${data.lot}`} />}
+            {data?.state && <CardMainData heading={`State: ${data.state}`} />}
+          </div>
           <SmallCardDescription
             note={data.info}
             description={data.description}

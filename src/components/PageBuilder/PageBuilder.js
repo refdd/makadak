@@ -31,7 +31,6 @@ const PageBuilder = ({ structure, type, listProps, isCategory }) => {
 
       let ListElement = cardMapping[type];
       if (el.title === "categories_recentlySold") ListElement = SoldProductCard;
-
       const renderCards = el?.auctions?.map((cardEl) => {
         const cardData = {
           country: cardEl?.country?.countryCode,
@@ -52,7 +51,10 @@ const PageBuilder = ({ structure, type, listProps, isCategory }) => {
           link: `/lot-details/${cardEl?.id}`,
           catName: el.title.split("categories_")[1],
           flag: cardEl?.country?.flagImagesUrl,
+
           lot: cardEl?.lot,
+          state: cardEl?.state,
+
           saleType: cardEl?.saleType,
         };
         return <ListElement data={cardData} key={el.catId} />;

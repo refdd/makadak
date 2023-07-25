@@ -34,14 +34,14 @@ export default function SearchResults({
     }
   }, [filterRes]);
 
-
   const onFilter = (value, applyFilter) => {
     dispatch(onAddFilter(value));
-    if (applyFilter)
-      onApplyFilter()
+    if (applyFilter) onApplyFilter();
   };
   const onApplyFilter = () => {
-    const filteredData = Object.fromEntries(Object.entries(filter).filter(([_, v]) => v));
+    const filteredData = Object.fromEntries(
+      Object.entries(filter).filter(([_, v]) => v)
+    );
     filterAuction({ ...filteredData });
   };
   return (
@@ -83,7 +83,9 @@ export default function SearchResults({
           />
         </>
       )}
-      <SortModal onFilter={onFilter} open={isSortModalOpen}
+      <SortModal
+        onFilter={onFilter}
+        open={isSortModalOpen}
         onClose={() => {
           toggleSortModal();
         }}
