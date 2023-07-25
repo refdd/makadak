@@ -1,10 +1,18 @@
 import { Box, TextField, Typography } from "@mui/material";
 
-export default function TopupValue({ value, onChange, action, hasError, minimumBid }) {
+export default function TopupValue({
+  value,
+  onChange,
+  action,
+  hasError,
+  minimumBid,
+  snackbarState,
+}) {
+  console.log(snackbarState);
   return (
     <Box marginTop={5}>
       <TextField
-        name='amount'
+        name="amount"
         fullWidth
         label={`Your ${action} (Required)`}
         variant="outlined"
@@ -27,6 +35,19 @@ export default function TopupValue({ value, onChange, action, hasError, minimumB
       >
         The Minimum {action} amount is {minimumBid}
       </Typography>
+      {snackbarState?.open ? (
+        <Typography
+          textAlign="center"
+          component="p"
+          marginTop={1}
+          color="#ff1744"
+          fontSize={16}
+        >
+          {snackbarState.message}
+        </Typography>
+      ) : (
+        ""
+      )}
     </Box>
   );
 }

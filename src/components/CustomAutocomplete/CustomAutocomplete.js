@@ -23,24 +23,25 @@ export default function CustomAutocomplete({
     <Autocomplete
       {...rest}
       fullWidth
-      options={name === 'year' ?
-        Object.values(
-          data.reduce((acc, obj) => {
-            acc['' + obj.id] = obj;
-            return acc;
-          }, {})
-        ).reverse() :
-        Object.values(
-          data.reduce((acc, obj) => {
-            acc['' + obj.id] = obj;
-            return acc;
-          }, {})
-        )}
+      options={
+        name === "year"
+          ? Object.values(
+              data.reduce((acc, obj) => {
+                acc["" + obj.id] = obj;
+                return acc;
+              }, {})
+            ).reverse()
+          : Object.values(
+              data.reduce((acc, obj) => {
+                acc["" + obj.id] = obj;
+                return acc;
+              }, {})
+            )
+      }
       getOptionLabel={(option) => option.label || option.name}
       id="controlled-autocomplete"
       value={value}
       onChange={async (event, newValue) => {
-
         if (name == "make") {
           const makeId = newValue?.id;
           const makeModels = await fetchApi(
