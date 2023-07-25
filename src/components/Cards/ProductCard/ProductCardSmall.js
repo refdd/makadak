@@ -62,7 +62,7 @@ export default function ProductCardSmall({ data, tag }) {
               id: data?.id,
               isFav: data?.isFav,
             }}
-            lot={data?.id}
+            lot={data?.lot}
           />
           <SmallCardMainData heading={data.title} />
           <div style={{ paddingLeft: 12, marginBottom: 12 }}>
