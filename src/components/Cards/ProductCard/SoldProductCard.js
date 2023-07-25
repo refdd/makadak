@@ -116,11 +116,13 @@ export default function SoldProductCard({ data }) {
         <div
           style={{
             display: "flex",
-            marginLeft: "10px",
+            fontSize: "1px ",
           }}
         >
-          {data?.lot && <CardMainData heading={`Lot #: ${data.lot}`} />}
-          {data?.state && <CardMainData heading={`State: ${data.state}`} />}
+          {data?.lot && <CardMainData small heading={`Lot #: ${data.lot}`} />}
+          {data?.state && (
+            <CardMainData small heading={`State: ${data.state}`} />
+          )}
         </div>
         <SmallCardDescription
           note={data.info}
