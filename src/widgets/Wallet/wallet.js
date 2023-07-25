@@ -53,7 +53,6 @@ const Wallet = () => {
     }
   }, [minimumDeposit]);
 
-
   useEffect(() => {
     if (requestRes?.isError) {
       const errorMessage = Object.values(requestRes?.error?.data || {})
@@ -69,8 +68,6 @@ const Wallet = () => {
     // setAlerError(requestRes?.isError);
   }, [requestRes]);
 
-
-
   const onClickWallet = () => {
     if (openPricingOptions) {
       setOpenPricingOptions(false);
@@ -83,9 +80,9 @@ const Wallet = () => {
     setOpenPricingOptions(bool);
   };
 
-  const router= useRouter();
+  const router = useRouter();
   const onRequestWithdraw = () => {
-    router.push('/withdraw')
+    router.push("/withdraw");
     // requestWithdraw({
     //   amount: profileDetails?.data?.deposit?.amount,
     //   currencyCode: profileDetails?.data?.currency?.code,
@@ -206,11 +203,9 @@ const Wallet = () => {
               <Stack py={2}>
                 <Typography color={"#D9D9D9"}>
                   The down payment for a bid is{" "}
-                  {(minimumDepositAmount?.depositAmount?.amount ??
-                    0) +
-                      " " +
-                     ( minimumDepositAmount?.depositAmount?.currency?.code ??
-                    "")}
+                  {(minimumDepositAmount?.depositAmount?.amount ?? 0) +
+                    " " +
+                    (minimumDepositAmount?.depositAmount?.currency?.code ?? "")}
                 </Typography>
               </Stack>
               <Grid

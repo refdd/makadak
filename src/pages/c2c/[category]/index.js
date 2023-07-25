@@ -122,10 +122,10 @@ const C2CCategory = ({
       formDataApi[_key] = _value;
     });
     if (formState.saleType === "auction" && !formDataApi["reservedPrice"])
-      return alert("please fill vehicle price");
+      if (formState.saleType === "sale" && !formDataApi["vehiclePrice"])
+        // return alert("please fill vehicle price");
 
-    if (formState.saleType === "sale" && !formDataApi["vehiclePrice"])
-      return alert("please fill vehicle price");
+        return alert("please fill vehicle price");
 
     formDataApi.auctionVehicleTypeId = categoryId;
     const accessToken = cookieCutter.get("accessToken");
