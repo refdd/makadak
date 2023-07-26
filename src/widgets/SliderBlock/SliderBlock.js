@@ -21,14 +21,14 @@ export default function SliderBlock({
   navigation = true,
   spaceBetween = 10,
   pagination = false,
-  className
+  className,
 }) {
   const [swiperState, setSwiperState] = useState({
     slidePerView: slidesPerView,
     navigation: navigation,
     spaceBetween,
     rid: null,
-    swiperInstance: null
+    swiperInstance: null,
   });
   const swiperRef = useRef();
   const slides = children?.map((slide, i) => (
@@ -49,14 +49,14 @@ export default function SliderBlock({
     if (isMobile) {
       setSwiperState((state) => ({
         slidePerView: slidesPerView === "auto" ? "auto" : 1,
-        navigation:  navigation && false,
+        navigation: navigation && false,
       }));
     }
   }, [isMobile, slidesPerView]);
 
   useEffect(() => {
-    setSwiperState(prevState => ({ ...prevState, rid: generateCustomID() }));
-  }, [])
+    setSwiperState((prevState) => ({ ...prevState, rid: generateCustomID() }));
+  }, []);
   const paginations = {
     clickable: true,
     renderBullet: function (index, className) {
@@ -71,7 +71,6 @@ export default function SliderBlock({
       paddingX={"0px"}
       width="100%"
     >
-
       <Swiper
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
@@ -80,7 +79,7 @@ export default function SliderBlock({
         allowSlidePrev
         slidesPerView={swiperState.slidePerView}
         spaceBetween={spaceBetween}
-        navigation={ !isMobile }
+        navigation={!isMobile}
         modules={[Navigation, Pagination]}
         className={`mySwiper w-100 ${className}`}
         centeredSlides={false}
@@ -88,7 +87,6 @@ export default function SliderBlock({
       >
         {slides}
       </Swiper>
-
     </Stack>
   );
 }

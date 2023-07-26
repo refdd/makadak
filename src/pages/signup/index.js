@@ -80,10 +80,10 @@ export default function Profile(props) {
     //   setErrors(prevState => ({ ...prevState, mobile: 'Invalid phone number.' }))
     //   validated = validated && false;
     // }
-    if (!mobileRegex.test(profileData.mobile)) {
+    if (profileData.mobile.length !== 9) {
       setErrors((prevState) => ({
         ...prevState,
-        mobile: "Mobile number must have at least 9 digits.",
+        mobile: "Mobile number must have exactly 9 digits.",
       }));
       validated = false;
     }
@@ -132,7 +132,7 @@ export default function Profile(props) {
       dateOfBirth: dayjs(val).format("YYYY-MM-DD"),
     }));
   };
-  console.log(getCountriesQuery);
+  // console.log(getCountriesQuery);
   return (
     <>
       <CustomDialog

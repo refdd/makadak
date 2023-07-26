@@ -107,6 +107,7 @@ export default function TopUp({
               ? e?.data?.payload?.validation[0]?.errors[0]?.message
               : e.data.message,
           }));
+          console.log(!!e?.data?.payload?.validation?.length);
         });
     if (type === "bid") {
       if (!!switchState) {
@@ -128,6 +129,7 @@ export default function TopUp({
                 ? e?.data?.payload?.validation[0]?.errors[0]?.message
                 : e.message,
             }));
+            console.log(e.message);
           });
       } else {
         placeBidQ({
@@ -146,6 +148,7 @@ export default function TopUp({
                 ? e?.data?.payload?.validation[0]?.errors[0]?.message
                 : e.message,
             }));
+            console.log(e?.data?.payload?.validation[0]?.errors[0]?.message);
           });
       }
     }
@@ -188,6 +191,7 @@ export default function TopUp({
           hasError={hasError}
           value={inputValue}
           action={action}
+          snackbarState={snackbarState}
           minimumBid={
             auctionDetails?.saleType === "sale"
               ? auctionDetails?.highestBidPrice?.amount
@@ -231,13 +235,13 @@ export default function TopUp({
         action={action}
         minimumBid={auctionDetails?.minimumBidAmount}
       />
-      <Snackbar
+      {/* <Snackbar
         open={snackbarState.open}
         onClose={() => setSnackbarState((state) => ({ ...state, open: false }))}
         autoHideDuration={2000}
       >
         <Alert severity={snackbarState.type}>{snackbarState.message}</Alert>
-      </Snackbar>
+      </Snackbar> */}
     </Box>
   );
 }
