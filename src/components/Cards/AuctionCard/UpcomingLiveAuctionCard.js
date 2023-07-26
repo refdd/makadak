@@ -39,6 +39,23 @@ export default function UpcomingLiveAuctionCard({ data }) {
               />
             }
           />
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: "5px",
+            }}
+          >
+            {data?.lot && (
+              <CardMainData overflow="visible" heading={`Lot #: ${data.lot}`} />
+            )}
+            {data?.state && (
+              <CardMainData
+                overflow="visible"
+                heading={`State: ${data.state}`}
+              />
+            )}
+          </div>
           <CardDescription txt={data.description} />
         </CardContent>
       </Card>

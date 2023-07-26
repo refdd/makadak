@@ -77,9 +77,7 @@ export default function Search() {
           searchValue={state.searchInput}
           onSearchInputChange={handleSearchInputChange}
         />
-        <Box
-       
-        >
+        <Box>
           <SearchResults
             isSortModalOpen={state.sortModal.isOpen}
             searchValue={"state.searchInput"}
@@ -88,7 +86,6 @@ export default function Search() {
           />
         </Box>
       </Box>
-
     </Box>
   );
 }

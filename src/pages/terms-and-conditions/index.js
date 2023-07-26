@@ -3,7 +3,10 @@ import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 import { useRouter } from "next/router";
 
 export default function TermsAndConditions(params) {
-  const router = useRouter()
+  const router = useRouter();
+  const backClickHandler = () => {
+    router.push("/");
+  };
 
   return (
     <Box
@@ -13,11 +16,16 @@ export default function TermsAndConditions(params) {
       px={{ xs: 2, lg: 20 }}
       py={3}
     >
-    <ArrowBackIosRoundedIcon
-    onClick={() => router.back()}
-    style={{ cursor: "pointer", position:'absolute', marginLeft:'-4%', marginTop:'1%' }}
-  />
-      <h2 >
+      <ArrowBackIosRoundedIcon
+        onClick={backClickHandler}
+        style={{
+          cursor: "pointer",
+          position: "absolute",
+          marginLeft: "-4%",
+          marginTop: "1%",
+        }}
+      />
+      <h2>
         <strong>Terms and Conditions</strong>
       </h2>
 

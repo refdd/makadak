@@ -14,7 +14,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function ProductCardMain({ data }) {
-  console.log(data?.price);
   // 'https://cdn-staging.mazadakapp.com/country-flags/sa.png'
   return (
     <Link
@@ -82,12 +81,12 @@ export default function ProductCardMain({ data }) {
               />
             }
           />
-          {data?.lot && data?.state && (
-            <div style={{ display: "flex" }}>
-              <CardMainData heading={`Lot #: ${data?.lot}`} />
-              <CardMainData heading={`State:   ${data?.state}`} />
-            </div>
-          )}
+
+          <div style={{ display: "flex" }}>
+            {data?.lot && <CardMainData heading={`Lot #: ${data.lot}`} />}
+            {data?.state && <CardMainData heading={`State: ${data.state}`} />}
+          </div>
+
           <CardDescription info={data?.info} description={data?.description} />
           <div style={{ paddingRight: 12, margin: "12px 0" }}>
             <Divider sx={{ borderColor: "white" }} />

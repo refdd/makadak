@@ -588,6 +588,16 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
                       flexDirection={"column"}
                       justifyContent={"space-between"}
                     >
+                      {auctionDetails?.lot && (
+                        <Grid
+                          item
+                          fontWeight={400}
+                          fontSize={22}
+                          textAlign={"center"}
+                        >
+                          # {auctionDetails.lot}
+                        </Grid>
+                      )}
                       {auctionDetails?.saleType === "sale" && (
                         <Grid
                           item

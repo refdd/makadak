@@ -1,6 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 
-const CardMainData = ({ heading, tag }) => {
+const CardMainData = ({ heading, tag, small = false }) => {
   var arabic = /[\u0600-\u06FF]/;
   return (
     <Grid
@@ -19,7 +19,8 @@ const CardMainData = ({ heading, tag }) => {
         <Typography
           fontWeight={900}
           color={"white"}
-          margin={"5px 0"}
+          fontSize={small ? "15px" : undefined}
+          margin={"5px 5px"}
           // width={'100%'}
           sx={{
             textTransform: "uppercase",
