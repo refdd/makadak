@@ -2,20 +2,29 @@ import { Grid, Typography } from "@mui/material";
 import ImageLayers from "@/components/ImageLayers/ImageLayers";
 import Link from "next/link";
 
-export default function MyActivityItem({ title, Icon, filpIcon = false, number, bids = false, offers = false, imgs }) {
+export default function MyActivityItem({
+  title,
+  Icon,
+  filpIcon = false,
+  number,
+  bids = false,
+  offers = false,
+  imgs,
+}) {
   return (
-    <Grid
-      xs={true}
-      padding={0}
-      width={"100%"}
-      item
-    >
-
-      <Link href={`/activity?type=${bids ? 'auction' : 'sale'}`} style={{ cursor: 'pointer', textDecoration: 'none', color: 'unset' }}>
+    <Grid xs={true} padding={0} width={"100%"} item>
+      <Link
+        href={`/activity?type=${bids ? "auction" : "sale"}`}
+        style={{ cursor: "pointer", textDecoration: "none", color: "unset" }}
+      >
         <Grid
           item
           marginBottom={1}
-          sx={{ display: "flex", justifyContent: "space-between", width: "100%" }}
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+          }}
         >
           <Typography
             fontSize={18}
@@ -28,7 +37,7 @@ export default function MyActivityItem({ title, Icon, filpIcon = false, number, 
           >
             {title}
           </Typography>
-          <div style={{ display: "flex", alignItems: 'center' }}>
+          <div style={{ display: "flex", alignItems: "center" }}>
             <Icon
               color={"primary"}
               sx={{
@@ -53,7 +62,7 @@ export default function MyActivityItem({ title, Icon, filpIcon = false, number, 
             </Typography>
           </div>
         </Grid>
-        <Grid item xs={12} position={'relative'}>
+        <Grid item xs={12} position={"relative"}>
           <ImageLayers
             imgs={imgs}
             imgWidth={600}
