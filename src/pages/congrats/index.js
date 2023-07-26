@@ -6,10 +6,10 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import { useRouter } from "next/router";
 
-const Congrats = ({title, type}) => {
+const Congrats = ({ title, type }) => {
   const router = useRouter();
   return (
-    <Box sx={{  top: "12%", left: 8, width: "100%",height:'100%'}}>
+    <Box sx={{ top: "12%", left: 8, width: "100%", height: "100%" }}>
       <Box
         sx={{
           display: "flex",
@@ -51,7 +51,7 @@ const Congrats = ({title, type}) => {
         }}
       >
         <Button
-          onClick={() => router.push(`/activity?type=${type}`)}
+          onClick={() => router.reload()}
           variant="contained"
           sx={{
             borderRadius: "16px",
