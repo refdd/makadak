@@ -51,7 +51,7 @@ import {
   useGenerateStcPaymentMutation,
   useGetSavedCardsQuery,
 } from "@/redux/apis/paymentApi";
-import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded"; 
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
   if (error) console.log("###ERROR");
   const router = useRouter();
@@ -411,7 +411,7 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
   console.log(auctionDetails);
   return (
     <>
-    <ArrowBackIosRoundedIcon
+      <ArrowBackIosRoundedIcon
         onClick={() => router.back()}
         sx={{
           cursor: "pointer",
@@ -421,527 +421,524 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
           fontSize: 18,
         }}
       />
-    <Box sx={{ width: "90%", margin: "4% auto", paddingBottom: 10 }}>
-      {isMobile ? (
-        <SliderBlock slidesPerView={1} navigation={true} pagination={true}>
-          {renderImages}
-        </SliderBlock>
-      ) : (
-        <>
-          <CustomImageList
-            itemData={auctionDetails?.mediaPhotos}
-            handleOpen={handleOpen}
-          />
-          <GalleryModal
-            open={open}
-            handleClose={handleClose}
-            cmp={
-              <SliderBlock
-                slidesPerView={1}
-                navigation={true}
-                pagination={true}
-              >
-                {renderImages}
-              </SliderBlock>
-            }
-          />
-        </>
-      )}
+      <Box sx={{ width: "90%", margin: "4% auto", paddingBottom: 10 }}>
+        {isMobile ? (
+          <SliderBlock slidesPerView={1} navigation={true} pagination={true}>
+            {renderImages}
+          </SliderBlock>
+        ) : (
+          <>
+            <CustomImageList
+              itemData={auctionDetails?.mediaPhotos}
+              handleOpen={handleOpen}
+            />
+            <GalleryModal
+              open={open}
+              handleClose={handleClose}
+              cmp={
+                <SliderBlock
+                  slidesPerView={1}
+                  navigation={true}
+                  pagination={true}
+                >
+                  {renderImages}
+                </SliderBlock>
+              }
+            />
+          </>
+        )}
 
-      <Grid container flex flexDirection={"column"} padding={1} my={2}>
-        <Grid item xs={12}>
-          <Grid container justifyContent={"space-between"}>
-            <Grid item>
-              <Typography fontWeight={700} fontSize={24}>
-                {auctionDetails?.title}
-              </Typography>
+        <Grid container flex flexDirection={"column"} padding={1} my={2}>
+          <Grid item xs={12}>
+            <Grid container justifyContent={"space-between"}>
+              <Grid item>
+                <Typography fontWeight={700} fontSize={24}>
+                  {auctionDetails?.title}
+                </Typography>
+              </Grid>
+              <Grid item>
+                <FavoritesButton
+                  id={auctionDetails?.id}
+                  isFavourite={auctionDetails?.isFavourite}
+                />
+              </Grid>
             </Grid>
             <Grid item>
-              <FavoritesButton
-                id={auctionDetails?.id}
-                isFavourite={auctionDetails?.isFavourite}
-              />
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Grid container spacing={1} justifyContent={"space-between"}>
-              <Grid item xs={12} md={7}>
-                <Grid container flexDirection={"column"}>
-                  <Grid item my={2} xs={12}>
-                    <Typography fontWeight={700} fontSize={22}>
-                      Lot Details
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Grid container flexWrap={"wrap"} spacing={2}>
-                      {renderProperties}
+              <Grid container spacing={1} justifyContent={"space-between"}>
+                <Grid item xs={12} md={7}>
+                  <Grid container flexDirection={"column"}>
+                    <Grid item my={2} xs={12}>
+                      <Typography fontWeight={700} fontSize={22}>
+                        Lot Details
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <Grid container flexWrap={"wrap"} spacing={2}>
+                        {renderProperties}
+                      </Grid>
+                    </Grid>
+                    <Grid item py={2}>
+                      <Typography
+                        fontWeight={400}
+                        fontSize={14}
+                        sx={{ textJustify: "inner-word", textAlign: "justify" }}
+                      >
+                        {auctionDetails?.description}
+                      </Typography>
                     </Grid>
                   </Grid>
-                  <Grid item py={2}>
-                    <Typography
-                      fontWeight={400}
-                      fontSize={14}
-                      sx={{ textJustify: "inner-word", textAlign: "justify" }}
-                    >
-                      {auctionDetails?.description}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                <Grid
-                  my={2}
-                  container
-                  flexDirection={"column"}
-                  justifyContent={"center"}
-                >
-                  <Grid item display={"flex"} alignItems={"center"}>
-                    <LocationOnIcon />
-                    <Typography fontSize={16} fontWeight={600}>
-                      Item Location
-                    </Typography>
-                  </Grid>
-                  <Grid item>
-                    <Typography
-                      color="whitesmoke"
-                      fontWeight={300}
-                      fontSize={14}
-                    >
-                      {auctionDetails?.geoLocation?.length &&
-                        auctionDetails?.geoLocation[0].text}
-                    </Typography>
-                  </Grid>
-                </Grid>
-                {inspectionPrice && (
                   <Grid
                     my={2}
-                    spacing={2}
                     container
                     flexDirection={"column"}
                     justifyContent={"center"}
                   >
                     <Grid item display={"flex"} alignItems={"center"}>
-                      <IconButton
-                        sx={{ background: "#00F0A9", marginRight: 2 }}
-                        size="small"
-                      >
-                        <FindInPageIcon />
-                      </IconButton>
-                      <Typography fontWeight={600} fontSize={18}>
-                        Inspection Report
+                      <LocationOnIcon />
+                      <Typography fontSize={16} fontWeight={600}>
+                        Item Location
                       </Typography>
                     </Grid>
                     <Grid item>
-                      <Typography fontWeight={500}>
-                        Get an additional inspection report and valuation for
-                        SAR {inspectionPrice}
-                      </Typography>
-                      <Typography fontWeight={300} color="grey" fontSize={14}>
-                        Once you have made payment, an inspection Report for
-                        this lot will be available from your account section.
+                      <Typography
+                        color="whitesmoke"
+                        fontWeight={300}
+                        fontSize={14}
+                      >
+                        {auctionDetails?.geoLocation?.length &&
+                          auctionDetails?.geoLocation[0].text}
                       </Typography>
                     </Grid>
-                    <Grid
-                      item
-                      display={"flex"}
-                      width={"50%"}
-                      justifyContent={"space-between"}
-                    >
-                      <Typography>Buy an Inspection Report</Typography>
-                      <IOSSwitch
-                        onChange={() =>
-                          setInspectionReportChecked((state) => !state)
-                        }
-                        value={inspectionReportChecked}
-                      />
-                    </Grid>
-                    {inspectionReportChecked && (
-                      <Grid item>
-                        <Button
-                          variant="contained"
-                          size="small"
-                          sx={{ borderRadius: 2 }}
-                          onClick={onPayForReport}
-                        >
-                          <Typography
-                            fontWeight={600}
-                            fontSize={14}
-                            color="black"
-                          >
-                            Pay for report
-                          </Typography>
-                        </Button>
-                      </Grid>
-                    )}
                   </Grid>
-                )}
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <Grid
-                  container
-                  flexDirection={"column"}
-                  justifyContent={"space-between"}
-                >
-                  {auctionDetails?.saleType === "auction" && (
-                    <>
-                      <Grid item>
-                        <Typography
-                          textAlign={"center"}
-                          fontWeight={700}
-                          fontSize={26}
-                        >
-                          {days}D : {hours}H : {minutes}M
-                        </Typography>
-                      </Grid>
-                      <Divider sx={{ margin: "10px 0" }} />
-                    </>
-                  )}
-                  <Grid item my={2}>
+                  {inspectionPrice && (
                     <Grid
+                      my={2}
+                      spacing={2}
                       container
                       flexDirection={"column"}
-                      justifyContent={"space-between"}
+                      justifyContent={"center"}
                     >
-                      {auctionDetails?.lot && (
-                        <Grid
-                          item
-                          fontWeight={400}
-                          fontSize={22}
-                          textAlign={"center"}
+                      <Grid item display={"flex"} alignItems={"center"}>
+                        <IconButton
+                          sx={{ background: "#00F0A9", marginRight: 2 }}
+                          size="small"
                         >
-                          # {auctionDetails.lot}
-                        </Grid>
-                      )}
-                      {auctionDetails?.saleType === "sale" && (
-                        <Grid
-                          item
-                          fontWeight={400}
-                          fontSize={26}
-                          textAlign={"center"}
-                        >
-                          Lot Price
-                        </Grid>
-                      )}
-                      {auctionDetails?.buyNowOption && (
-                        <Grid
-                          item
-                          fontWeight={700}
-                          fontSize={26}
-                          textAlign={"center"}
-                        >
-                          {auctionDetails?.vehiclePrice?.currency?.code}{" "}
-                          {formattedPrice}
-                        </Grid>
-                      )}
-                      {auctionDetails?.saleType === "auction" && (
-                        <>
-                          <Grid
-                            item
-                            fontWeight={200}
-                            fontSize={18}
-                            textAlign={"center"}
-                            my={1}
+                          <FindInPageIcon />
+                        </IconButton>
+                        <Typography fontWeight={600} fontSize={18}>
+                          Inspection Report
+                        </Typography>
+                      </Grid>
+                      <Grid item>
+                        <Typography fontWeight={500}>
+                          Get an additional inspection report and valuation for
+                          SAR {inspectionPrice}
+                        </Typography>
+                        <Typography fontWeight={300} color="grey" fontSize={14}>
+                          Once you have made payment, an inspection Report for
+                          this lot will be available from your account section.
+                        </Typography>
+                      </Grid>
+                      <Grid
+                        item
+                        display={"flex"}
+                        width={"50%"}
+                        justifyContent={"space-between"}
+                      >
+                        <Typography>Buy an Inspection Report</Typography>
+                        <IOSSwitch
+                          onChange={() =>
+                            setInspectionReportChecked((state) => !state)
+                          }
+                          value={inspectionReportChecked}
+                        />
+                      </Grid>
+                      {inspectionReportChecked && (
+                        <Grid item>
+                          <Button
+                            variant="contained"
+                            size="small"
+                            sx={{ borderRadius: 2 }}
+                            onClick={onPayForReport}
                           >
-                            Starting bid
-                            <Typography fontWeight={700} fontSize={20}>
-                              {auctionDetails?.startingPrice?.currency?.code}{" "}
-                              {auctionDetails?.startingPrice?.amount.toLocaleString()}
+                            <Typography
+                              fontWeight={600}
+                              fontSize={14}
+                              color="black"
+                            >
+                              Pay for report
                             </Typography>
-                          </Grid>
-                          <Grid
-                            item
-                            fontWeight={300}
-                            fontSize={14}
-                            textAlign={"center"}
-                            sx={{ textDecoration: "underline" }}
-                          >
-                            bid deposit required
-                          </Grid>
-                        </>
+                          </Button>
+                        </Grid>
                       )}
                     </Grid>
-                    {auctionDetails?.highestBidPrice?.amount &&
-                      (auctionDetails?.saleType === "auction" ||
-                        auctionDetails?.saleOffer?.canAcceptOffers) && (
-                        <Grid
-                          container
-                          flexDirection={"column"}
-                          justifyContent={"space-between"}
-                        >
+                  )}
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Grid
+                    container
+                    flexDirection={"column"}
+                    justifyContent={"space-between"}
+                  >
+                    {auctionDetails?.saleType === "auction" && (
+                      <>
+                        <Grid item>
+                          <Typography
+                            textAlign={"center"}
+                            fontWeight={700}
+                            fontSize={26}
+                          >
+                            {days}D : {hours}H : {minutes}M
+                          </Typography>
+                        </Grid>
+                        <Divider sx={{ margin: "10px 0" }} />
+                      </>
+                    )}
+                    <Grid item my={2}>
+                      <Grid
+                        container
+                        flexDirection={"column"}
+                        justifyContent={"space-between"}
+                      >
+                        {auctionDetails?.lot && (
                           <Grid
-                            mt={2}
                             item
                             fontWeight={400}
-                            fontSize={16}
+                            fontSize={22}
                             textAlign={"center"}
                           >
-                            Current Highest{" "}
-                            {auctionDetails?.saleType === "sale"
-                              ? "Offer"
-                              : "Bid"}
+                            # {auctionDetails.lot}
                           </Grid>
+                        )}
+                        {auctionDetails?.saleType === "sale" && (
+                          <Grid
+                            item
+                            fontWeight={400}
+                            fontSize={26}
+                            textAlign={"center"}
+                          >
+                            Lot Price
+                          </Grid>
+                        )}
+                        {auctionDetails?.buyNowOption && (
                           <Grid
                             item
                             fontWeight={700}
-                            fontSize={20}
+                            fontSize={26}
                             textAlign={"center"}
                           >
                             {auctionDetails?.vehiclePrice?.currency?.code}{" "}
-                            {auctionDetails?.highestBidPrice?.amount.toLocaleString()}
+                            {formattedPrice}
                           </Grid>
-                        </Grid>
-                      )}
-                  </Grid>
-                  <Divider sx={{ margin: "10px 0" }} />
-
-                  {auctionDetails?.saleType === "auction" &&
-                    auctionDetails?.user_id !== user?.id &&
-                    auctionDetails?.saleOffer?.offer?.state !== "accepted" && (
-                      <Grid item xs={12} textAlign={"center"}>
-                        <CustomButton
-                          onClick={() => handleOpenOfferDialog()}
-                          variant={"contained"}
-                          sx={{
-                            fontWeight: 800,
-                            fontSize: ".9rem",
-                            borderRadius: 1,
-                            color: "black",
-                            width: "84%",
-                          }}
-                          label={"Place Bid"}
-                        />
-                      </Grid>
-                    )}
-
-                  {auctionDetails?.buyNowOption &&
-                    auctionDetails?.user_id !== user?.id &&
-                    auctionDetails?.saleOffer?.offer?.state !== "accepted" && (
-                      <Grid
-                        item
-                        textAlign={"center"}
-                        py={1}
-                        onClick={handleBuyNow}
-                      >
-                        <CustomButton
-                          variant={"contained"}
-                          sx={{
-                            fontWeight: 800,
-                            fontSize: ".9rem",
-                            borderRadius: 1,
-                            height: "80%",
-                            color: "black",
-                            width: "84%",
-                          }}
-                          label={"Buy Now"}
-                        />
-                      </Grid>
-                    )}
-                  {auctionDetails?.saleType === "sale" &&
-                    auctionDetails?.saleOffer?.canAcceptOffers &&
-                    auctionDetails?.user_id !== user?.id &&
-                    auctionDetails?.saleOffer?.offer?.state !== "accepted" && (
-                      <Grid item textAlign={"center"}>
-                        <CustomButton
-                          onClick={() => handleOpenOfferDialog()}
-                          variant={"contained"}
-                          sx={{
-                            fontWeight: 800,
-                            fontSize: ".9rem",
-                            borderRadius: 1,
-                            height: "80%",
-                            color: "black",
-                            width: "84%",
-                          }}
-                          label={"Make Offer"}
-                        />
-                      </Grid>
-                    )}
-                  {auctionDetails?.saleType === "sale" &&
-                    auctionDetails?.saleOffer?.offer?.amount?.amount &&
-                    !offerWithdrawn &&
-                    auctionDetails?.user_id !== user?.id &&
-                    auctionDetails?.saleOffer?.offer?.state !== "accepted" && (
-                      <Grid item margin="auto" width="84%">
-                        <Grid
-                          container
-                          alignItems={"flex-end"}
-                          justifyContent={"space-between"}
-                          width="100%"
-                        >
-                          <Grid item xs={6}>
-                            <Grid item mb={1}>
-                              <Typography>
-                                Your offer: &nbsp;
-                                <Typography
-                                  fontSize={14}
-                                  color={"red"}
-                                  sx={{ display: "inline-block" }}
-                                >
-                                  {auctionDetails?.saleOffer?.offer?.declined
-                                    ? "Declined"
-                                    : ""}
-                                </Typography>
-                                <Typography fontWeight={600}>
-                                  {
-                                    auctionDetails?.saleOffer?.offer?.amount
-                                      .currency.code
-                                  }
-                                  {
-                                    auctionDetails?.saleOffer?.offer?.amount
-                                      .amount.toLocaleString()
-                                  }
-                                </Typography>
+                        )}
+                        {auctionDetails?.saleType === "auction" && (
+                          <>
+                            <Grid
+                              item
+                              fontWeight={200}
+                              fontSize={18}
+                              textAlign={"center"}
+                              my={1}
+                            >
+                              Starting bid
+                              <Typography fontWeight={700} fontSize={20}>
+                                {auctionDetails?.startingPrice?.currency?.code}{" "}
+                                {auctionDetails?.startingPrice?.amount.toLocaleString()}
                               </Typography>
                             </Grid>
-
-                            {!auctionDetails?.saleOffer?.offer?.declined && (
-                              <Grid item>
-                                <CustomButton
-                                  onClick={() => handleWithdrawOffer()}
-                                  variant={"contained"}
-                                  sx={{
-                                    fontWeight: 800,
-                                    fontSize: ".9rem",
-                                    borderRadius: 1,
-                                    height: "80%",
-                                    color: "white",
-                                    width: "90%",
-                                    backgroundColor: "secondary.light",
-                                  }}
-                                  label={"Withdraw"}
-                                />
-                              </Grid>
-                            )}
+                            <Grid
+                              item
+                              fontWeight={300}
+                              fontSize={14}
+                              textAlign={"center"}
+                              sx={{ textDecoration: "underline" }}
+                            >
+                              bid deposit required
+                            </Grid>
+                          </>
+                        )}
+                      </Grid>
+                      {auctionDetails?.highestBidPrice?.amount &&
+                        (auctionDetails?.saleType === "auction" ||
+                          auctionDetails?.saleOffer?.canAcceptOffers) && (
+                          <Grid
+                            container
+                            flexDirection={"column"}
+                            justifyContent={"space-between"}
+                          >
+                            <Grid
+                              mt={2}
+                              item
+                              fontWeight={400}
+                              fontSize={16}
+                              textAlign={"center"}
+                            >
+                              Current Highest{" "}
+                              {auctionDetails?.saleType === "sale"
+                                ? "Offer"
+                                : "Bid"}
+                            </Grid>
+                            <Grid
+                              item
+                              fontWeight={700}
+                              fontSize={20}
+                              textAlign={"center"}
+                            >
+                              {auctionDetails?.vehiclePrice?.currency?.code}{" "}
+                              {auctionDetails?.highestBidPrice?.amount.toLocaleString()}
+                            </Grid>
                           </Grid>
-                          {auctionDetails?.saleOffer?.offer?.counterOffer && (
+                        )}
+                    </Grid>
+                    <Divider sx={{ margin: "10px 0" }} />
+
+                    {auctionDetails?.saleType === "auction" &&
+                      auctionDetails?.user_id !== user?.id &&
+                      auctionDetails?.saleOffer?.offer?.state !==
+                        "accepted" && (
+                        <Grid item xs={12} textAlign={"center"}>
+                          <CustomButton
+                            onClick={() => handleOpenOfferDialog()}
+                            variant={"contained"}
+                            sx={{
+                              fontWeight: 800,
+                              fontSize: ".9rem",
+                              borderRadius: 1,
+                              color: "black",
+                              width: "84%",
+                            }}
+                            label={"Place Bid"}
+                          />
+                        </Grid>
+                      )}
+
+                    {auctionDetails?.buyNowOption &&
+                      auctionDetails?.user_id !== user?.id &&
+                      auctionDetails?.saleOffer?.offer?.state !==
+                        "accepted" && (
+                        <Grid
+                          item
+                          textAlign={"center"}
+                          py={1}
+                          onClick={handleBuyNow}
+                        >
+                          <CustomButton
+                            variant={"contained"}
+                            sx={{
+                              fontWeight: 800,
+                              fontSize: ".9rem",
+                              borderRadius: 1,
+                              height: "80%",
+                              color: "black",
+                              width: "84%",
+                            }}
+                            label={"Buy Now"}
+                          />
+                        </Grid>
+                      )}
+                    {auctionDetails?.saleType === "sale" &&
+                      auctionDetails?.saleOffer?.canAcceptOffers &&
+                      auctionDetails?.user_id !== user?.id &&
+                      auctionDetails?.saleOffer?.offer?.state !==
+                        "accepted" && (
+                        <Grid item textAlign={"center"}>
+                          <CustomButton
+                            onClick={() => handleOpenOfferDialog()}
+                            variant={"contained"}
+                            sx={{
+                              fontWeight: 800,
+                              fontSize: ".9rem",
+                              borderRadius: 1,
+                              height: "80%",
+                              color: "black",
+                              width: "84%",
+                            }}
+                            label={"Make Offer"}
+                          />
+                        </Grid>
+                      )}
+                    {auctionDetails?.saleType === "sale" &&
+                      auctionDetails?.saleOffer?.offer?.amount?.amount &&
+                      !offerWithdrawn &&
+                      auctionDetails?.user_id !== user?.id &&
+                      auctionDetails?.saleOffer?.offer?.state !==
+                        "accepted" && (
+                        <Grid item margin="auto" width="84%">
+                          <Grid
+                            container
+                            alignItems={"flex-end"}
+                            justifyContent={"space-between"}
+                            width="100%"
+                          >
                             <Grid item xs={6}>
-                              <Grid container flexDirection={"column"}>
-                                <Grid item mb={1}>
-                                  <Typography>
-                                    Counter offer: &nbsp;
-                                    <Typography fontWeight={600}>
-                                      {
-                                        auctionDetails?.saleOffer?.offer
-                                          ?.counterOfferAmount?.currency.code
-                                      }
-                                      {
-                                        auctionDetails?.saleOffer?.offer
-                                          ?.counterOfferAmount?.amount.toLocaleString()
-                                      }
-                                    </Typography>
+                              <Grid item mb={1}>
+                                <Typography>
+                                  Your offer: &nbsp;
+                                  <Typography
+                                    fontSize={14}
+                                    color={"red"}
+                                    sx={{ display: "inline-block" }}
+                                  >
+                                    {auctionDetails?.saleOffer?.offer?.declined
+                                      ? "Declined"
+                                      : ""}
                                   </Typography>
-                                </Grid>
+                                  <Typography fontWeight={600}>
+                                    {
+                                      auctionDetails?.saleOffer?.offer?.amount
+                                        .currency.code
+                                    }
+                                    {auctionDetails?.saleOffer?.offer?.amount.amount.toLocaleString()}
+                                  </Typography>
+                                </Typography>
+                              </Grid>
+
+                              {!auctionDetails?.saleOffer?.offer?.declined && (
                                 <Grid item>
                                   <CustomButton
-                                    onClick={() => handleAcceptCounterOffer()}
+                                    onClick={() => handleWithdrawOffer()}
                                     variant={"contained"}
                                     sx={{
                                       fontWeight: 800,
                                       fontSize: ".9rem",
                                       borderRadius: 1,
                                       height: "80%",
+                                      color: "white",
                                       width: "90%",
-                                      backgroundColor: "primary.dark",
+                                      backgroundColor: "secondary.light",
                                     }}
-                                    label={"Accept"}
+                                    label={"Withdraw"}
                                   />
                                 </Grid>
-                              </Grid>
+                              )}
                             </Grid>
-                          )}
+                            {auctionDetails?.saleOffer?.offer?.counterOffer && (
+                              <Grid item xs={6}>
+                                <Grid container flexDirection={"column"}>
+                                  <Grid item mb={1}>
+                                    <Typography>
+                                      Counter offer: &nbsp;
+                                      <Typography fontWeight={600}>
+                                        {
+                                          auctionDetails?.saleOffer?.offer
+                                            ?.counterOfferAmount?.currency.code
+                                        }
+                                        {auctionDetails?.saleOffer?.offer?.counterOfferAmount?.amount.toLocaleString()}
+                                      </Typography>
+                                    </Typography>
+                                  </Grid>
+                                  <Grid item>
+                                    <CustomButton
+                                      onClick={() => handleAcceptCounterOffer()}
+                                      variant={"contained"}
+                                      sx={{
+                                        fontWeight: 800,
+                                        fontSize: ".9rem",
+                                        borderRadius: 1,
+                                        height: "80%",
+                                        width: "90%",
+                                        backgroundColor: "primary.dark",
+                                      }}
+                                      label={"Accept"}
+                                    />
+                                  </Grid>
+                                </Grid>
+                              </Grid>
+                            )}
+                          </Grid>
                         </Grid>
-                      </Grid>
-                    )}
+                      )}
 
-                  {auctionDetails?.user_id === user?.id &&
-                    auctionDetails?.saleOffer?.offer?.state !== "accepted" &&
-                    auctionDetails?.saleType === "sale" && (
-                      <Grid
-                        item
-                        textAlign={"center"}
-                        py={1}
-                        onClick={toggleSellerOffers}
-                      >
-                        <CustomButton
-                          variant={"contained"}
-                          sx={{
-                            fontWeight: 800,
-                            fontSize: ".9rem",
-                            borderRadius: 1,
-                            height: "80%",
-                            color: "black",
-                            width: "84%",
-                          }}
-                          label={"Offers"}
-                        />
-                      </Grid>
-                    )}
+                    {auctionDetails?.user_id === user?.id &&
+                      auctionDetails?.saleOffer?.offer?.state !== "accepted" &&
+                      auctionDetails?.saleType === "sale" && (
+                        <Grid
+                          item
+                          textAlign={"center"}
+                          py={1}
+                          onClick={toggleSellerOffers}
+                        >
+                          <CustomButton
+                            variant={"contained"}
+                            sx={{
+                              fontWeight: 800,
+                              fontSize: ".9rem",
+                              borderRadius: 1,
+                              height: "80%",
+                              color: "black",
+                              width: "84%",
+                            }}
+                            label={"Offers"}
+                          />
+                        </Grid>
+                      )}
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
           </Grid>
+          <Divider sx={{ margin: "10px 0" }} />
+          {showSellerOffers && (
+            <Grid container>
+              <SliderBlock
+                slideMaxWidth={600}
+                spaceBetween={20}
+                slidesPerView={"auto"}
+                navigation={true}
+              >
+                {renderOffers}
+              </SliderBlock>
+            </Grid>
+          )}
+          <Snackbar
+            open={snackbarState.open}
+            onClose={() =>
+              setSnackbarState((state) => ({ ...state, open: false }))
+            }
+            autoHideDuration={2000}
+          >
+            <Alert severity={snackbarState.type}>{snackbarState.message}</Alert>
+          </Snackbar>
+          <CustomDialog
+            type={auctionDetails?.saleType}
+            open={offerDialogOpen}
+            handleClose={handleCloseOfferDialog}
+            component={
+              topUpSucces ? (
+                <Congrats
+                  title={`${
+                    auctionDetails?.saleType === "sale" ? "Offer" : "Bid"
+                  } placed successfuly!`}
+                  type={auctionDetails?.saleType}
+                  handleCloseTopupSuccess={handleCloseTopupSuccess}
+                />
+              ) : (
+                <TopUp
+                  userBalance={user?.deposit}
+                  auctionDetails={auctionDetails}
+                  handleTopupSuccess={handleTopupSuccess}
+                  type={auctionDetails?.saleType === "sale" ? "offer" : "bid"}
+                />
+              )
+            }
+          />
+          <InspectionPayment
+            openPricingOptions={openPricingOptions}
+            setOpenPricingOptions={setOpenPricingOptions}
+            handleCardClick={handleCardClick}
+          />
+          <PaymentCardsModal
+            savedCards={getSavedCardsQ?.data}
+            openCardsModal={openCardsModal}
+            handleToggleCardsModal={handleToggleCardsModal}
+            handleToggleCard={handleToggleCard}
+            amount={inspectionPrice}
+            type="inspection_report_advanced_buyer"
+            inspectionReportId={inspectionReportId}
+          />
         </Grid>
-        <Divider sx={{ margin: "10px 0" }} />
-        {showSellerOffers && (
-          <Grid container>
-            <SliderBlock
-              slideMaxWidth={600}
-              spaceBetween={20}
-              slidesPerView={"auto"}
-              navigation={true}
-            >
-              {renderOffers}
-            </SliderBlock>
-          </Grid>
-        )}
-        <Snackbar
-          open={snackbarState.open}
-          onClose={() =>
-            setSnackbarState((state) => ({ ...state, open: false }))
-          }
-          autoHideDuration={2000}
-        >
-          <Alert severity={snackbarState.type}>{snackbarState.message}</Alert>
-        </Snackbar>
-        <CustomDialog
-          type={auctionDetails?.saleType}
-          open={offerDialogOpen}
-          handleClose={handleCloseOfferDialog}
-          component={
-            topUpSucces ? (
-              <Congrats
-                title={`${
-                  auctionDetails?.saleType === "sale" ? "Offer" : "Bid"
-                } placed successfuly!`}
-                type={auctionDetails?.saleType}
-                handleCloseTopupSuccess={handleCloseTopupSuccess}
-              />
-            ) : (
-              <TopUp
-                userBalance={user?.deposit}
-                auctionDetails={auctionDetails}
-                handleTopupSuccess={handleTopupSuccess}
-                type={auctionDetails?.saleType === "sale" ? "offer" : "bid"}
-              />
-            )
-          }
-        />
-        <InspectionPayment
-          openPricingOptions={openPricingOptions}
-          setOpenPricingOptions={setOpenPricingOptions}
-          handleCardClick={handleCardClick}
-        />
-        <PaymentCardsModal
-          savedCards={getSavedCardsQ?.data}
-          openCardsModal={openCardsModal}
-          handleToggleCardsModal={handleToggleCardsModal}
-          handleToggleCard={handleToggleCard}
-          amount={inspectionPrice}
-          type="inspection_report_advanced_buyer"
-          inspectionReportId={inspectionReportId}
-        />
-      </Grid>
-    </Box>
+      </Box>
     </>
-
   );
 };
 export default LotDetails;

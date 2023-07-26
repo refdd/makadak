@@ -40,7 +40,9 @@ export default function TopUp({
 }) {
   const router = useRouter();
   const [action, setAction] = useState("offer");
-  const hasMoney = userBalance?.amount >= auctionDetails?.depositAmount?.amount.toLocaleString();
+  const hasMoney =
+    userBalance?.amount >=
+    auctionDetails?.depositAmount?.amount.toLocaleString();
   const [inputValue, setInputValue] = useState("");
   const [hasError, setHasError] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -235,13 +237,13 @@ export default function TopUp({
         action={action}
         minimumBid={auctionDetails?.minimumBidAmount}
       />
-      {/* <Snackbar
+      <Snackbar
         open={snackbarState.open}
         onClose={() => setSnackbarState((state) => ({ ...state, open: false }))}
         autoHideDuration={2000}
       >
         <Alert severity={snackbarState.type}>{snackbarState.message}</Alert>
-      </Snackbar> */}
+      </Snackbar>
     </Box>
   );
 }
