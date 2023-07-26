@@ -26,7 +26,7 @@ const Price = ({ handleTopupSuccess, selectedMethod }) => {
   }
   const onChange = (e) => {
     setError(e.target.value > 3000);
-    setTopupAmount((e.target.value - 0 ).toLocaleString());
+    setTopupAmount((e.target.value));
   };
 
   useEffect(() => {
