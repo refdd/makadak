@@ -55,7 +55,7 @@ export default function TopupTitle({ action, title, downPayment }) {
             },
           }}
         >
-          {downPayment?.currency?.code} {downPayment?.amount}&nbsp;
+          {downPayment?.currency?.code} {downPayment?.amount.toLocaleString()}&nbsp;
         </Typography>
         will be deducted from your wallet as a down payment.
       </Typography>

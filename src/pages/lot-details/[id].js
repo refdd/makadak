@@ -51,6 +51,7 @@ import {
   useGenerateStcPaymentMutation,
   useGetSavedCardsQuery,
 } from "@/redux/apis/paymentApi";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded"; 
 const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
   if (error) console.log("###ERROR");
   const router = useRouter();
@@ -408,6 +409,17 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
   });
   console.log(auctionDetails);
   return (
+    <>
+    <ArrowBackIosRoundedIcon
+        onClick={() => router.back()}
+        sx={{
+          cursor: "pointer",
+          marginLeft: "2%",
+          marginTop: "2%",
+          marginBottom: "1%",
+          fontSize: 18,
+        }}
+      />
     <Box sx={{ width: "90%", margin: "4% auto", paddingBottom: 10 }}>
       {isMobile ? (
         <SliderBlock slidesPerView={1} navigation={true} pagination={true}>
@@ -620,7 +632,7 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
                             Starting bid
                             <Typography fontWeight={700} fontSize={20}>
                               {auctionDetails?.startingPrice?.currency?.code}{" "}
-                              {auctionDetails?.startingPrice?.amount}
+                              {auctionDetails?.startingPrice?.amount.toLocaleString()}
                             </Typography>
                           </Grid>
                           <Grid
@@ -662,7 +674,7 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
                             textAlign={"center"}
                           >
                             {auctionDetails?.vehiclePrice?.currency?.code}{" "}
-                            {auctionDetails?.highestBidPrice?.amount}
+                            {auctionDetails?.highestBidPrice?.amount.toLocaleString()}
                           </Grid>
                         </Grid>
                       )}
@@ -763,7 +775,7 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
                                   }
                                   {
                                     auctionDetails?.saleOffer?.offer?.amount
-                                      .amount
+                                      .amount.toLocaleString()
                                   }
                                 </Typography>
                               </Typography>
@@ -801,7 +813,7 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
                                       }
                                       {
                                         auctionDetails?.saleOffer?.offer
-                                          ?.counterOfferAmount?.amount
+                                          ?.counterOfferAmount?.amount.toLocaleString()
                                       }
                                     </Typography>
                                   </Typography>
@@ -916,6 +928,8 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
         />
       </Grid>
     </Box>
+    </>
+
   );
 };
 export default LotDetails;

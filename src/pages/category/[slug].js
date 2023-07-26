@@ -13,7 +13,7 @@ import { useGetVehicleMakeQuery } from "@/redux/apis/vehicleApi";
 import FilterTagSlider from "@/widgets/SearchBox/FilterTagSlider/FilterTagSlider";
 import { useDispatch } from "react-redux";
 import { onAddFilter } from "@/redux/slices/advanceSearch.slice";
-
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded"; 
 
 export const getServerSideProps = wrapper.getServerSideProps(
     (store) => async ({ req, res }) => {
@@ -56,6 +56,17 @@ const Category = () => {
         router.push('/search');
     }
     return (
+    <>
+       <ArrowBackIosRoundedIcon
+        onClick={() => router.back()}
+        sx={{
+          cursor: "pointer",
+          marginLeft: "2%",
+          marginTop: "2%",
+          marginBottom: "1%",
+          fontSize: 18,
+        }}
+      />
         <div>
             <Typography padding={2} fontSize={30} fontWeight={1000}>
                 {selectedCategory?.name}
@@ -85,6 +96,7 @@ const Category = () => {
                 </Fab>
             </ScrollTop>
         </div>
+        </>
     )
 }
 

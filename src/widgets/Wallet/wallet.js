@@ -203,7 +203,7 @@ const Wallet = () => {
               <Stack py={2}>
                 <Typography color={"#D9D9D9"}>
                   The down payment for a bid is{" "}
-                  {(minimumDepositAmount?.depositAmount?.amount ?? 0) +
+                  {(minimumDepositAmount?.depositAmount?.amount.toLocaleString() ?? 0) +
                     " " +
                     (minimumDepositAmount?.depositAmount?.currency?.code ?? "")}
                 </Typography>

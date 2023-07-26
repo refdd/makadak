@@ -27,7 +27,7 @@ const TopupSubmit = ({ isSubmitted, onClick, minimumBid, depositAmount }) => {
           }}
         >
           You do not have enough money in your wallet to bid. You must have 
-          a minimum of {depositAmount?.amount} in order to proceed.
+          a minimum of {depositAmount?.amount.toLocaleString()} in order to proceed.
         </Typography>
       }
       <Button
@@ -52,7 +52,7 @@ const TopupSubmit = ({ isSubmitted, onClick, minimumBid, depositAmount }) => {
           fontSize: "12px",
         }}
       >
-        Minimum increment: {minimumBid.currency.code} {minimumBid.amount}
+        Minimum increment: {minimumBid.currency.code} {minimumBid.amount.toLocaleString()}
       </Typography>
     </Box >
   );

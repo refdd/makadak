@@ -16,6 +16,7 @@ import Withdraw from "@/widgets/Withdraw/Withdraw";
 import Price from "../price-payment";
 import { useEffect } from "react";
 import { useGetProfileQuery } from "@/redux/apis/profile.api";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 
 const WalletNew = () => {
   const router = useRouter();
@@ -58,6 +59,17 @@ const WalletNew = () => {
     if (reroute) router.push(`/lot-details/${router.query.id}`);
   }, [data]);
   return (
+   <>
+      <ArrowBackIosRoundedIcon
+        onClick={() => router.back()}
+        sx={{
+          cursor: "pointer",
+          marginLeft: "2%",
+          marginTop: "2%",
+          marginBottom: "1%",
+          fontSize: 18,
+        }}
+      />
     <Grid
       container
       width={{ lg: "70vw" }}
@@ -94,7 +106,7 @@ const WalletNew = () => {
                 {data?.deposit?.currency?.code}
               </Typography>
               <Typography fontSize={25} fontWeight={700}>
-                {data?.deposit?.amount}
+                {data?.deposit?.amount.toLocaleString()}
               </Typography>
             </Box>
           </Grid>
@@ -381,6 +393,7 @@ const WalletNew = () => {
         )}
       </Grid>
     </Grid>
+   </>
   );
 };
 

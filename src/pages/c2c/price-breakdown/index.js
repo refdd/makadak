@@ -73,7 +73,7 @@ const PriceBreakdown = ({ handleTopup, formState, auctionId, categoryId, report 
         <Typography
           sx={{ color: "#FFFFFF", fontWeight: 900, fontSize: "10px" }}
         >
-          {report?.amount?.currency?.code} {report?.amount?.amount}
+          {report?.amount?.currency?.code} {report?.amount?.amount.toLocaleString()}
         </Typography>
       </Card>
 
@@ -102,7 +102,7 @@ const PriceBreakdown = ({ handleTopup, formState, auctionId, categoryId, report 
         <Typography
           sx={{ color: "#000000", fontWeight: 900, fontSize: "10px" }}
         >
-          {report?.amount?.currency?.code} {report?.amount?.amount}
+          {report?.amount?.currency?.code} {report?.amount?.amount.toLocaleString()}
         </Typography>
       </Card>
       <br />
@@ -120,7 +120,7 @@ const PriceBreakdown = ({ handleTopup, formState, auctionId, categoryId, report 
         openCardsModal={openCardsModal}
         handleToggleCardsModal={handleToggleCardsModal}
         handleToggleCard={handleToggleCard}
-        amount={report?.amount?.amount}
+        amount={(report?.amount?.amount - 0).toLocaleString()}
         type="inspection_report_basic_seller"
         inspectionReportId={report?.id}
         cb={handleTopup}

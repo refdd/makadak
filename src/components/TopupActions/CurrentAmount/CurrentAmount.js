@@ -10,7 +10,7 @@ export default function CurrentAmount({ action, highestOffer }) {
       {
         <Typography variant="h4" marginTop={0.5} fontWeight="bold">
           {highestOffer?.amount
-            ? highestOffer?.currency?.code + " " + highestOffer?.amount
+            ? highestOffer?.currency?.code + " " + highestOffer?.amount.toLocaleString()
             : "---"}
         </Typography>
       }

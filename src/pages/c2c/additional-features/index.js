@@ -48,7 +48,7 @@ const AdditionalFeatures = ({ handleCheckout, data }) => {
                 <Typography
                     sx={{ color: "#00F0A9", fontWeight: 900, fontSize: "10px" }}
                 >
-                    There will be a charge of {data?.amount?.currency?.code} {data?.amount?.amount} for an Inspection Report.
+                    There will be a charge of {data?.amount?.currency?.code} {data?.amount?.amount.toLocaleString()} for an Inspection Report.
                 </Typography>
             </Card>
 
