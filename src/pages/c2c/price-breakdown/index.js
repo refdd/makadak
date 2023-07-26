@@ -56,34 +56,6 @@ const PriceBreakdown = ({ handleTopup, formState, auctionId, categoryId, report 
           display: "flex",
           justifyContent: "space-between",
           alignItems: "center",
-        }}
-      >
-        <Typography
-          sx={{
-            fontWeight: 900,
-            fontSize: "13px",
-            fontStyle: "normal",
-            color: "#FFFFFF",
-            fontFamily: "Montserrat",
-          }}
-        >
-          Inspection Report
-        </Typography>
-
-        <Typography
-          sx={{ color: "#FFFFFF", fontWeight: 900, fontSize: "10px" }}
-        >
-          {report?.amount?.currency?.code} {report?.amount?.amount.toLocaleString()}
-        </Typography>
-      </Card>
-
-      <Card
-        sx={{
-          height: "58px",
-          padding: 4,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
           backgroundColor: "#00F0A9",
         }}
       >
