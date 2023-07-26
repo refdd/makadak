@@ -4,7 +4,7 @@ import { HYDRATE } from "next-redux-wrapper";
 export const auctionApi = createApi({
   reducerPath: 'auctionApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+    baseUrl: '/api',
     prepareHeaders: (headers, { getState }) => {
       const accessToken = getState()?.auth?.token?.accessToken;
       if (accessToken) {
