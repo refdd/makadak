@@ -1,12 +1,26 @@
 import PartnersCard from "@/components/Partners/partnersCard";
 import { Box, Grid, LinearProgress, Skeleton, Typography } from "@mui/material";
 import { useGetBusinessesListQuery } from "@/redux/apis/businessesApi";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
+import { useRouter } from "next/router";
 
 const Partners = () => {
   const { data, isLoading } = useGetBusinessesListQuery();
-
+  const router = useRouter();
   return (
-    <Grid container p={2}>
+    <>
+      <ArrowBackIosRoundedIcon
+        onClick={() => router.back()}
+        sx={{
+          cursor: "pointer",
+          marginLeft: "2%",
+          marginTop: "2%",
+          marginBottom: "1%",
+          fontSize: 18,
+        }}
+      />
+    
+      {/* <Grid container p={2}>
       {data?.data?.map((business) => (
         <Grid item xs={12} sm={6} md={6} lg={3} xl={3} mb={5} key={business.id}>
           <PartnersCard {...business} />
@@ -42,8 +56,22 @@ const Partners = () => {
             </Typography>
           </>
         )}
+      </Box> 
+    </Grid> */}
+
+      <Box textAlign={"center"} width={"100%"}>
+        <>
+          <Typography
+            lineHeight={1}
+            fontSize={"600%"}
+            fontWeight={1000}
+            color={"#171717"}
+          >
+            COMING SOON
+          </Typography>
+        </>
       </Box>
-    </Grid>
+    </>
   );
 };
 
