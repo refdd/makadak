@@ -73,6 +73,7 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleTopupSuccess = () => setTopUpSucces(true);
+  const handleCloseTopupSuccess = () => setTopUpSucces(false);
   const handleOpenOfferDialog = () => {
     if (user?.deposit?.amount === undefined) router.push("/auth");
     else setOfferDialogOpen(true);
@@ -899,6 +900,7 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
                   auctionDetails?.saleType === "sale" ? "Offer" : "Bid"
                 } placed successfuly!`}
                 type={auctionDetails?.saleType}
+                handleCloseTopupSuccess={handleCloseTopupSuccess}
               />
             ) : (
               <TopUp

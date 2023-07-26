@@ -84,11 +84,11 @@ const C2CForm = ({ formState, handleFormContinue, locations, catId }) => {
           filteredData.saleType === "auction" &&
           !filteredData.reservedPrice
         ) {
-          setErrors((prevState) => ({
-            ...prevState,
-            reservedPrice: "Field is required",
-          }));
-          validated = validated && false;
+          // setErrors((prevState) => ({
+          //   ...prevState,
+          //   reservedPrice: "Field is required",
+          // }));
+          validated = validated && true;
         }
         if (filteredData.saleType === "sale" && !filteredData.vehiclePrice) {
           setErrors((prevState) => ({
@@ -151,7 +151,7 @@ const C2CForm = ({ formState, handleFormContinue, locations, catId }) => {
       value={formState[name]}
       setValue={(payload) => dispatch(setFormState(payload))}
       label={label}
-      data={name === "year" ? options.reverse() : options}
+      data={name === "year" ? options?.reverse() : options}
       sx={{ width: "100%", marginBottom: "1%" }}
       setModels={setModels}
       key={name}
