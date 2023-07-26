@@ -10,7 +10,7 @@ import CardFooter from "./CardFooter/CardFooter";
 import StarRateIcon from "@mui/icons-material/StarRate";
 import SmallCardDescription from "./CardDescription/SmallCardDescription";
 import Image from "next/image";
-
+import CardMainData from "./CardMainData/CardMainData";
 const SoldTag = () => {
   return (
     <div
@@ -56,7 +56,6 @@ const SaleEndedTag = () => {
   );
 };
 export default function SoldProductCard({ data }) {
-  console.log(data);
   return (
     // <Link href={{ pathname: link + `/${id}` }} style={{ textDecoration: 'none' }}>
     <Card
@@ -113,6 +112,17 @@ export default function SoldProductCard({ data }) {
         <SoldCardMainData heading={data.title} flag={data.flag} />
         <div style={{ paddingLeft: 12, marginBottom: 12 }}>
           <Divider sx={{ borderColor: "white" }} />
+        </div>
+        <div
+          style={{
+            display: "flex",
+            fontSize: "1px ",
+          }}
+        >
+          {data?.lot && <CardMainData small heading={`Lot #: ${data.lot}`} />}
+          {data?.state && (
+            <CardMainData small heading={`State: ${data.state}`} />
+          )}
         </div>
         <SmallCardDescription
           note={data.info}

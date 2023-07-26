@@ -37,8 +37,8 @@ const WinnerCard = ({ auction, isPaymentComplete }) => (
       ></Box>
     </Box>
     <CardContent sx={{ p: 1, pb: "8px !important" }}>
-      <CardMainData heading={auction.title} />
-      <CardDescription txt={auction.description} />
+      <CardMainData heading={auction?.title} />
+      <CardDescription txt={auction?.description} />
       {!isPaymentComplete && <CardFooter />}
     </CardContent>
   </Card>

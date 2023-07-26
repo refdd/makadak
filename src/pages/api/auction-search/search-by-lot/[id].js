@@ -1,20 +1,29 @@
-export default function handler(req, res) {
-  var myHeaders = new Headers();
-  myHeaders.append("Authorization", req?.headers?.authorization);
-  var requestOptions = {
-    method: "GET",
-    headers: myHeaders,
-    redirect: "follow",
+import axios, { AxiosError } from "axios";
+export default async function handler(req, res) {
+  const headers = {
+    Authorization: req?.headers?.authorization,
   };
 
-  fetch(
-    `${process.env.API_BASE_URL}/auction-vehicles/search-by-lot/${req?.query?.id}?currencyCode=SAR`,
-    requestOptions
-  )
-    .then((response) => response.text())
-    .then((result) => {
-      const response = JSON.parse(result);
-      res.status(response?.status ? response?.status : 200).json(response);
-    })
-    .catch((error) => console.log("error", error));
+  const api = axios.create({
+    baseURL: process.env.API_BASE_URL || "",
+  });
+  const endpoint = `/auction-vehicles/search-by-lot/${req?.query?.id}?currencyCode=SAR`;
+  const config = {
+    headers,
+    redirect: "follow",
+  };
+  try {
+    const { status, data } = await api.get(endpoint, config);
+    const rStatus = status || 200;
+
+    return res.status(rStatus).json(data);
+  } catch (error) {
+    console.log(error);
+    // Check if the error is caused by the response and return the status error
+    if (error instanceof AxiosError)
+      return res.status(error.response.status || 500).json(error);
+
+    // Otherwise the error is caused by Next server and return 500
+    return res.status(500).json(error);
+  }
 }

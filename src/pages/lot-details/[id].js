@@ -74,6 +74,7 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const handleTopupSuccess = () => setTopUpSucces(true);
+  const handleCloseTopupSuccess = () => setTopUpSucces(false);
   const handleOpenOfferDialog = () => {
     if (user?.deposit?.amount === undefined) router.push("/auth");
     else setOfferDialogOpen(true);
@@ -599,6 +600,16 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
                       flexDirection={"column"}
                       justifyContent={"space-between"}
                     >
+                      {auctionDetails?.lot && (
+                        <Grid
+                          item
+                          fontWeight={400}
+                          fontSize={22}
+                          textAlign={"center"}
+                        >
+                          # {auctionDetails.lot}
+                        </Grid>
+                      )}
                       {auctionDetails?.saleType === "sale" && (
                         <Grid
                           item
@@ -901,6 +912,7 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
                   auctionDetails?.saleType === "sale" ? "Offer" : "Bid"
                 } placed successfuly!`}
                 type={auctionDetails?.saleType}
+                handleCloseTopupSuccess={handleCloseTopupSuccess}
               />
             ) : (
               <TopUp

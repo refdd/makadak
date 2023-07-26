@@ -22,6 +22,7 @@ import { useGetCountriesQuery } from "@/redux/apis/locations/countries.api";
 import { useGetRegionByCountryQuery } from "@/redux/apis/locations/regions.api";
 import { useGetCityByRegionQuery } from "@/redux/apis/locations/cities.api";
 import { useEffect } from "react";
+import CustomInputNumber from "@/components/CustomInput/CustomInputNumber";
 
 const ProfileForm = ({
   profileData,
@@ -203,7 +204,17 @@ const ProfileForm = ({
               </Grid>
 
               <Grid item xs={10} sm={10} md={10} lg={10}>
-                <CustomInput
+                {/* <CustomInput
+                  value={profileData.mobile}
+                  name={"mobile"}
+                  handleInputChange={handleInputChange}
+                  label={"Mobile phone number"}
+                  error={errors.mobile}
+                  prefix="+966"
+                  helperTxt={errors.mobile}
+                  required
+                /> */}
+                <CustomInputNumber
                   value={profileData.mobile}
                   name={"mobile"}
                   handleInputChange={handleInputChange}
