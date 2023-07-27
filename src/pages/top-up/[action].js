@@ -235,13 +235,13 @@ export default function TopUp({
         action={action}
         minimumBid={auctionDetails?.minimumBidAmount}
       />
-      <Snackbar
+      {/* <Snackbar
         open={snackbarState.open}
         onClose={() => setSnackbarState((state) => ({ ...state, open: false }))}
         autoHideDuration={2000}
       >
         <Alert severity={snackbarState.type}>{snackbarState.message}</Alert>
-      </Snackbar>
+      </Snackbar> */}
     </Box>
   );
 }
