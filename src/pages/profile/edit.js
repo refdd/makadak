@@ -31,6 +31,7 @@ import { useGetCityByRegionQuery } from "@/redux/apis/locations/cities.api";
 import { useGetProfileQuery } from "@/redux/apis/profile.api";
 import InputLabel from "@mui/material/InputLabel";
 import { checkPhoneNumber } from "@/lib/helpers";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded"; 
 
 export default function NewProfile(props) {
 
@@ -163,6 +164,17 @@ export default function NewProfile(props) {
     });
 
     return (
+        <>
+        <ArrowBackIosRoundedIcon
+        onClick={() => router.back()}
+        sx={{
+          cursor: "pointer",
+          marginLeft: "2%",
+          marginTop: "2%",
+          marginBottom: "1%",
+          fontSize: 18,
+        }}
+        />
         <Grid container padding={3} spacing={4} pb={10} width={{ sm: '100%', lg: '80%', xl: '70%' }}
             margin={{ lg: 'auto' }}>
             <Grid item xs={12} sm={6} margin={'auto'}>
@@ -442,5 +454,6 @@ export default function NewProfile(props) {
                 <Alert severity={snackbarState.type}>{snackbarState.message}</Alert>
             </Snackbar>
         </Grid>
+        </>
     )
 }

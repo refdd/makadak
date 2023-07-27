@@ -8,8 +8,7 @@ import { useGetInboxesQuery, useGetMessagesQuery, useSendMessageMutation } from 
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useGetProfileQuery } from "@/redux/apis/profile.api";
-
-
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded"; 
 const Chat = () => {
     const router = useRouter();
     const { chatId } = router.query;
@@ -43,8 +42,19 @@ const Chat = () => {
     useEffect(() => {
         var objDiv = document.getElementById("myDiv");
         objDiv.scrollTop = objDiv.scrollHeight;
-    }, [getMessagesQ?.data?.messages.length])
+    }, [getMessagesQ?.data?.messages.length]);
     return (
+     <>
+        <ArrowBackIosRoundedIcon
+        onClick={() => router.back()}
+        sx={{
+          cursor: "pointer",
+          marginLeft: "2%",
+          marginTop: "2%",
+          marginBottom: "1%",
+          fontSize: 18,
+        }}
+      />
         <Grid container width={{ xs: '95vw', sm: '80vw' }} margin='auto' >
             <Grid
                 item
@@ -130,6 +140,7 @@ const Chat = () => {
                 </Grid>
             </Grid>
         </Grid>
+    </>   
     )
 }
 

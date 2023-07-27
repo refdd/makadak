@@ -129,37 +129,51 @@ const Report = () => {
 
 
   return (
-    <Grid container flex flexDirection={'column'} my={2}>
-      <Grid item>
-        <Grid container>
-          {renderCards}
-          {renderCards}
-          {renderCards}
-          {renderCards}
+    <>
+      <ArrowBackIosRoundedIcon
+        onClick={() => router.back()}
+        sx={{
+          cursor: "pointer",
+          marginLeft: "2%",
+          marginTop: "2%",
+          marginBottom: "1%",
+          fontSize: 18,
+        }}
+      />
+      <Grid container flex flexDirection={"column"} my={2}>
+        <Grid item>
+          <Grid container>
+            {renderCards}
+            {renderCards}
+            {renderCards}
+            {renderCards}
+          </Grid>
         </Grid>
+        <InspectionPayment
+          openPricingOptions={openPricingOptions}
+          setOpenPricingOptions={setOpenPricingOptions}
+          handleCardClick={handleCardClick}
+        />
+        <PaymentCardsModal
+          savedCards={getSavedCardsQ?.data}
+          openCardsModal={openCardsModal}
+          handleToggleCardsModal={handleToggleCardsModal}
+          handleToggleCard={handleToggleCard}
+          amount={selectedInspectionReport?.totalAmount?.amount}
+          type="inspection_report_advanced_buyer"
+          inspectionReportId={selectedInspectionReport?.id}
+        />
+        <Snackbar
+          open={snackbarState.open}
+          onClose={() =>
+            setSnackbarState((state) => ({ ...state, open: false }))
+          }
+          autoHideDuration={2000}
+        >
+          <Alert severity={snackbarState.type}>{snackbarState.message}</Alert>
+        </Snackbar>
       </Grid>
-      <InspectionPayment
-        openPricingOptions={openPricingOptions}
-        setOpenPricingOptions={setOpenPricingOptions}
-        handleCardClick={handleCardClick}
-      />
-      <PaymentCardsModal
-        savedCards={getSavedCardsQ?.data}
-        openCardsModal={openCardsModal}
-        handleToggleCardsModal={handleToggleCardsModal}
-        handleToggleCard={handleToggleCard}
-        amount={selectedInspectionReport?.totalAmount?.amount}
-        type="inspection_report_advanced_buyer"
-        inspectionReportId={selectedInspectionReport?.id}
-      />
-      <Snackbar
-        open={snackbarState.open}
-        onClose={() => setSnackbarState(state => ({ ...state, open: false }))}
-        autoHideDuration={2000}
-      >
-        <Alert severity={snackbarState.type}>{snackbarState.message}</Alert>
-      </Snackbar>
-    </Grid>
+    </>
   );
 };
 

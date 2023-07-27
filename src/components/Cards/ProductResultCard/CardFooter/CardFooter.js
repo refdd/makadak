@@ -22,7 +22,7 @@ const CardFooter = ({ leftTextColor = "white" , price, views}) => {
                 },
               }}
             >
-             {price?.code + " " + price?.amount}
+             {price?.code + " " + price?.amount.toLocaleString()}
             </Typography>
           </Grid>
         </Grid>

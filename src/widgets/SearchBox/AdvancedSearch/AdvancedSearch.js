@@ -41,12 +41,16 @@ import {
   useGetAuctionSearchByLotMutation,
 } from "@/redux/apis/auctionSearchApi";
 import { checkIfNumber } from "@/lib/helpers";
+import { useRouter } from "next/router";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded"; 
+
 export default function AdvancedSearch({ onSearchInputChange, searchValue }) {
   const dispatch = useDispatch();
   const [state, setState] = useState({
     right: false,
     advSearchInput: "",
   });
+   const router = useRouter();
 
   const [countries, setCountries] = useState([]);
   const [regions, setRegions] = useState([]);
@@ -211,6 +215,16 @@ export default function AdvancedSearch({ onSearchInputChange, searchValue }) {
 
   return (
     <>
+       <ArrowBackIosRoundedIcon
+        onClick={() => router.back()}
+        sx={{
+          cursor: "pointer",
+          marginLeft: "2%",
+          marginTop: "2%",
+          marginBottom:'1%',
+          fontSize:18
+        }}
+      />
       <Button onClick={toggleDrawer("right", true)}>
         <Typography
           variant="body1"
@@ -225,7 +239,7 @@ export default function AdvancedSearch({ onSearchInputChange, searchValue }) {
           fontWeight={700}
           whiteSpace={"nowrap"}
         >
-          Advanced Search
+          Advanced Search 
         </Typography>
       </Button>
       <div>

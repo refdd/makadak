@@ -4,9 +4,11 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import {fetchApi} from "@/helpers/fetchApi";
 import { useMediaQuery } from "@mui/material";
-
+import { useRouter } from "next/router";
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded"; 
 
 const C2C = ({categoriesData}) => {
+    const router = useRouter();
 
     categoriesData.map((item) => {
         item['link'] = `/c2c/${item.id}`
@@ -16,6 +18,17 @@ const C2C = ({categoriesData}) => {
   const isMobile = useMediaQuery("(max-width: 600px)");
 
     return (
+        <>
+        <ArrowBackIosRoundedIcon
+        onClick={() => router.back()}
+        sx={{
+          cursor: "pointer",
+          marginLeft: "2%",
+          marginTop: "2%",
+          marginBottom:'1%',
+          fontSize:18
+        }}
+      />
         <div >
             <Grid
                 justifyContent={"center"}
@@ -40,6 +53,8 @@ const C2C = ({categoriesData}) => {
                 </Grid>
             </Grid>
         </div>
+        </>
+
     );
 };
 

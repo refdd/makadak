@@ -4,7 +4,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-import InputMask from "react-input-mask"; // Import the react-input-mask librar
+import InputMask from "react-input-mask";
 
 const CustomInputNumber = forwardRef(
   (
@@ -81,5 +81,8 @@ const CustomInputNumber = forwardRef(
     );
   }
 );
+
+// Setting the display name for the component
+CustomInputNumber.displayName = "CustomInputNumber";
 
 export default CustomInputNumber;

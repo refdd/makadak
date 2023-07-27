@@ -33,7 +33,7 @@ export default function TopupValue({
         color="#9d9d9d"
         fontSize={12}
       >
-        The Minimum {action} amount is {minimumBid}
+        The Minimum {action} amount is {minimumBid.toLocaleString()}
       </Typography>
       {snackbarState?.open ? (
         <Typography
