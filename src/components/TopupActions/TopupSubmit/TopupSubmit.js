@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 
 const TopupSubmit = ({ isSubmitted, onClick, minimumBid, depositAmount }) => {
+  // console.log(isSubmitted);
   return (
     <Box
       padding={"1% 2% 0 3%"}
@@ -15,8 +16,7 @@ const TopupSubmit = ({ isSubmitted, onClick, minimumBid, depositAmount }) => {
         },
       }}
     >
-      {
-        !isSubmitted &&
+      {!isSubmitted && (
         <Typography
           variant="body1"
           fontSize={13}
@@ -26,10 +26,11 @@ const TopupSubmit = ({ isSubmitted, onClick, minimumBid, depositAmount }) => {
             color: "#F44336",
           }}
         >
-          You do not have enough money in your wallet to bid. You must have 
-          a minimum of {depositAmount?.amount.toLocaleString()} in order to proceed.
+          You do not have enough money in your wallet to bid. You must have a
+          minimum of {depositAmount?.amount.toLocaleString()} in order to
+          proceed.
         </Typography>
-      }
+      )}
       <Button
         onClick={onClick}
         variant={isSubmitted ? "contained" : "outlined"}
@@ -38,10 +39,10 @@ const TopupSubmit = ({ isSubmitted, onClick, minimumBid, depositAmount }) => {
           borderRadius: "16px",
           padding: "13px",
           fontSize: "16px",
-          fontWeight:800
+          fontWeight: 800,
         }}
       >
-        {isSubmitted ? 'Confirm' : 'Top up'}
+        {isSubmitted ? "Confirm" : "Top up"}
       </Button>
       <Typography
         variant="body2"
@@ -52,9 +53,10 @@ const TopupSubmit = ({ isSubmitted, onClick, minimumBid, depositAmount }) => {
           fontSize: "12px",
         }}
       >
-        Minimum increment: {minimumBid.currency.code} {minimumBid.amount.toLocaleString()}
+        Minimum increment: {minimumBid.currency.code}{" "}
+        {minimumBid.amount.toLocaleString()}
       </Typography>
-    </Box >
+    </Box>
   );
 };
 

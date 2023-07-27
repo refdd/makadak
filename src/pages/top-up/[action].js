@@ -40,9 +40,13 @@ export default function TopUp({
 }) {
   const router = useRouter();
   const [action, setAction] = useState("offer");
+<<<<<<< HEAD
   const hasMoney =
     userBalance?.amount >=
     auctionDetails?.depositAmount?.amount.toLocaleString();
+=======
+  const hasMoney = userBalance?.amount >= auctionDetails?.depositAmount?.amount;
+>>>>>>> 13d4006029f26f4d380f85777613cfff25ad081e
   const [inputValue, setInputValue] = useState("");
   const [hasError, setHasError] = useState(false);
   const [submitted, setSubmitted] = useState(false);
