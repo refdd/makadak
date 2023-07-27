@@ -9,13 +9,15 @@ export default function handler(req, res) {
 
   const stringParams = new URLSearchParams(req.query).toString();
   fetch(
-    `${process.env.API_BASE_URL}/auction-vehicles?${stringParams}`, requestOptions)
+    `${process.env.API_BASE_URL}/auction-vehicles?${stringParams}`,
+    requestOptions
+  )
     .then((response) => {
-      res.status(response.status)
-      return response.text()
+      res.status(response.status);
+      return response.text();
     })
     .then((result, err) => {
-      res.send(result)
+      res.send(result);
     })
     .catch((error) => console.log("error", error));
 }
