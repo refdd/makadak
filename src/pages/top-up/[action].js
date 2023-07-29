@@ -37,6 +37,7 @@ export default function TopUp({
   handleTopupSuccess,
   auctionDetails,
   userBalance,
+  setDataOffer,
 }) {
   const router = useRouter();
   const [action, setAction] = useState("offer");
@@ -97,6 +98,12 @@ export default function TopUp({
       })
         .unwrap()
         .then((res) => {
+          // console.log(res);
+          setDataOffer((state) => ({
+            ...state,
+            auctionedPrice: res?.amount?.amount,
+            currency: res?.amount?.currency?.code,
+          }));
           handleTopupSuccess();
         })
         .catch((e) => {
@@ -119,6 +126,11 @@ export default function TopUp({
         })
           .unwrap()
           .then((res) => {
+            setDataOffer((state) => ({
+              ...state,
+              auctionedPrice: res?.auctionedPrice?.amount,
+              currency: res?.auctionedPrice?.currency?.code,
+            }));
             handleTopupSuccess();
           })
           .catch((e) => {
@@ -138,6 +150,12 @@ export default function TopUp({
         })
           .unwrap()
           .then((res) => {
+            setDataOffer((state) => ({
+              ...state,
+              auctionedPrice: res?.auctionedPrice?.amount,
+              currency: res?.auctionedPrice?.currency?.code,
+            }));
+
             handleTopupSuccess();
           })
           .catch((e) => {
