@@ -22,7 +22,7 @@ import { useGetCountriesQuery } from "@/redux/apis/locations/countries.api";
 import { useGetRegionByCountryQuery } from "@/redux/apis/locations/regions.api";
 import { useGetCityByRegionQuery } from "@/redux/apis/locations/cities.api";
 import { useEffect } from "react";
-import CustomInputNumber from "@/components/CustomInput/CustomInputNumber";
+import CustomInputNumber from "@/components/CustomInputNumber/CustomInputNumber";
 
 const ProfileForm = ({
   profileData,
