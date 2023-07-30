@@ -14,6 +14,9 @@ export default function CustomAutocomplete({
   setModels,
   setValue,
   name,
+  required,
+  error,
+  helperText,
   ...rest
 }) {
   const handleChange = (val) => {
@@ -57,7 +60,14 @@ export default function CustomAutocomplete({
         handleChange(newValue);
       }}
       renderInput={(params) => (
-        <TextField {...params} label={label} variant="standard" />
+        <TextField
+          {...params}
+          label={label}
+          variant="standard"
+          required
+          error={error}
+          helperText={helperText}
+        />
       )}
     />
   );

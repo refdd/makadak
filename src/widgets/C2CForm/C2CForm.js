@@ -51,57 +51,41 @@ const C2CForm = ({ formState, handleFormContinue, locations, catId }) => {
   const [offerTC, setOfferTC] = useState(false);
   const [errors, setErrors] = useState({});
   const formValid = (values) => {
+    // console.log(values);
     const filteredData = Object.fromEntries(
       Object.entries(values).filter(([_, v]) => v)
     );
     const validationObj = {
+      make: "required",
+      model: "required",
+      km: "required",
+      year: "required",
+      fuelType: "required",
+      transmission: "required",
+      cylinders: "required",
+      interiorColor: "required",
+      exteriorColor: "required",
+      condition: "required",
+      description: "required",
+      saleType: "required",
+      sellerType: "required",
       vehiclePrice: "number",
-      reservedPrice: "number",
-      title: "required",
     };
     let validated = true;
+
     Object.keys(validationObj).forEach((key, i) => {
-      if (validationObj[key] === "number" && filteredData[key]) {
-        if (!checkIfNumber(filteredData[key])) {
-          setErrors((prevState) => ({
-            ...prevState,
-            [key]: "Value must be a number",
-          }));
-          validated = validated && false;
-        } else {
-          setErrors((prevState) => ({ ...prevState, [key]: "" }));
-          validated = validated && true;
-        }
-      } else if (!filteredData[key]) {
-        if (catId !== "1" && !filteredData.title) {
-          setErrors((prevState) => ({
-            ...prevState,
-            title: "Field is required",
-          }));
-          validated = validated && false;
-        }
-        if (
-          filteredData.saleType === "auction" &&
-          !filteredData.reservedPrice
-        ) {
-          // setErrors((prevState) => ({
-          //   ...prevState,
-          //   reservedPrice: "Field is required",
-          // }));
-          validated = validated && true;
-        }
-        if (filteredData.saleType === "sale" && !filteredData.vehiclePrice) {
-          setErrors((prevState) => ({
-            ...prevState,
-            vehiclePrice: "Field is required",
-          }));
-          validated = validated && false;
-        }
+      if (!filteredData[key]) {
+        setErrors((prevState) => ({
+          ...prevState,
+          [key]: "Field is required",
+        }));
+        validated = false;
       } else {
         setErrors((prevState) => ({ ...prevState, [key]: "" }));
         validated = validated && true;
       }
     });
+
     return validated;
   };
 
@@ -155,6 +139,9 @@ const C2CForm = ({ formState, handleFormContinue, locations, catId }) => {
       sx={{ width: "100%", marginBottom: "1%" }}
       setModels={setModels}
       key={name}
+      required // Add the required attribute for all fields
+      error={errors[name]} // Display the error message for this field
+      helperText={errors[name]}
     />
   ));
 
@@ -172,6 +159,9 @@ const C2CForm = ({ formState, handleFormContinue, locations, catId }) => {
         data={options}
         sx={{ width: "100%", marginBottom: "1%" }}
         key={name}
+        required // Add the required attribute for all fields
+        error={errors[name]} // Display the error message for this field
+        helperText={errors[name]}
       />
     )
   );
@@ -192,6 +182,7 @@ const C2CForm = ({ formState, handleFormContinue, locations, catId }) => {
       })
     );
   };
+  console.log(errors);
   return (
     <Grid
       container
@@ -220,6 +211,18 @@ const C2CForm = ({ formState, handleFormContinue, locations, catId }) => {
                   {renderExtraInfoFields}
                 </Grid>
               </Grid>
+              {!formState.condition ? (
+                <Typography
+                  component="p"
+                  color="#ff1744"
+                  fontSize={14}
+                  fontWeight={400}
+                >
+                  Field is required
+                </Typography>
+              ) : (
+                ""
+              )}
               <Grid item py={2} my={2}>
                 <Grid container spacing={2}>
                   <RadioButtons
@@ -252,6 +255,9 @@ const C2CForm = ({ formState, handleFormContinue, locations, catId }) => {
               <C2CDescription
                 description={formState.description}
                 setFormState={(payload) => dispatch(setFormState(payload))}
+                error={errors.description}
+                helperText={errors.description}
+                required
               />
             </Grid>
           </Grid>
