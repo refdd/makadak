@@ -38,14 +38,17 @@ export default function TopUp({
   auctionDetails,
   userBalance,
   setDataOffer,
+  switchState,
+  setSwitchState,
+  setInputValue,
+  inputValue,
 }) {
   const router = useRouter();
   const [action, setAction] = useState("offer");
   const hasMoney = userBalance?.amount >= auctionDetails?.depositAmount?.amount;
-  const [inputValue, setInputValue] = useState("");
   const [hasError, setHasError] = useState(false);
+  const [buttonDisabel, setButtonDisabel] = useState(true);
   const [submitted, setSubmitted] = useState(false);
-  const [switchState, setSwitchState] = useState(false);
   const [maxBid, setMaxBid] = useState();
   const [makeOfferQ] = useMakeOfferMutation();
   const [placeBidQ] = usePlaceBidMutation();
@@ -88,6 +91,7 @@ export default function TopUp({
   useEffect(() => {
     setAction(type);
   }, [type]);
+
   const handleUserConfirmation = () => {
     console.log(type);
     if (type === "offer")
@@ -98,12 +102,6 @@ export default function TopUp({
       })
         .unwrap()
         .then((res) => {
-          // console.log(res);
-          setDataOffer((state) => ({
-            ...state,
-            auctionedPrice: res?.amount?.amount,
-            currency: res?.amount?.currency?.code,
-          }));
           handleTopupSuccess();
         })
         .catch((e) => {
@@ -126,11 +124,6 @@ export default function TopUp({
         })
           .unwrap()
           .then((res) => {
-            setDataOffer((state) => ({
-              ...state,
-              auctionedPrice: res?.auctionedPrice?.amount,
-              currency: res?.auctionedPrice?.currency?.code,
-            }));
             handleTopupSuccess();
           })
           .catch((e) => {
@@ -150,12 +143,6 @@ export default function TopUp({
         })
           .unwrap()
           .then((res) => {
-            setDataOffer((state) => ({
-              ...state,
-              auctionedPrice: res?.auctionedPrice?.amount,
-              currency: res?.auctionedPrice?.currency?.code,
-            }));
-
             handleTopupSuccess();
           })
           .catch((e) => {
@@ -207,6 +194,8 @@ export default function TopUp({
         <TopupValue
           onChange={handleInputChange}
           hasError={hasError}
+          setHasError={setHasError}
+          setButtonDisabel={setButtonDisabel}
           value={inputValue}
           action={action}
           snackbarState={snackbarState}
@@ -247,8 +236,9 @@ export default function TopUp({
         )}
       </CustomContainer>
       <TopupSubmit
+        buttonDisabel={buttonDisabel}
         depositAmount={auctionDetails?.depositAmount}
-        onClick={submitted ? handleUserConfirmation : handleSubmit}
+        onClick={submitted ? handleTopupSuccess : handleSubmit}
         isSubmitted={hasMoney || submitted}
         action={action}
         minimumBid={auctionDetails?.minimumBidAmount}

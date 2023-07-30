@@ -4,16 +4,31 @@ import Image from "next/image";
 import { Warning } from "@mui/icons-material";
 import { Avatar } from "@mui/material";
 import { orange } from "@mui/material/colors";
-
+import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
 function ReviewOffer({
   auctionDetails,
-  handelopenConfirmation,
+  handleUserConfirmation,
   dataOffer,
   type,
+  handleCloseTopupSuccess,
+  inputValue,
+  snackbarState,
 }) {
   //   console.log(dataOffer);
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+      <ArrowBackIosRoundedIcon
+        onClick={() => {
+          handleCloseTopupSuccess();
+        }}
+        sx={{
+          cursor: "pointer",
+          marginLeft: "2%",
+          marginTop: "2%",
+          marginBottom: "1%",
+          fontSize: 18,
+        }}
+      />
       <Typography
         sx={{
           fontSize: "18px",
@@ -119,7 +134,7 @@ function ReviewOffer({
               }}
             >
               {auctionDetails?.vehiclePrice?.currency?.code}{" "}
-              {dataOffer?.auctionedPrice?.toLocaleString()}
+              {parseInt(inputValue).toLocaleString()}
             </Typography>
           </Box>
         </Box>
@@ -137,10 +152,24 @@ function ReviewOffer({
           </Typography>
         </Grid>
       </Grid>
+      {snackbarState?.open ? (
+        <Typography
+          textAlign="center"
+          component="p"
+          marginTop={1}
+          color="#ff1744"
+          fontSize={18}
+          fontWeight={700}
+        >
+          {snackbarState.message}
+        </Typography>
+      ) : (
+        ""
+      )}
       <Box display={"flex"} justifyContent={"center"}>
         <Button
           onClick={() => {
-            handelopenConfirmation();
+            handleUserConfirmation();
           }}
           variant="contained"
           sx={{

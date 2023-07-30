@@ -52,6 +52,7 @@ import {
   useGetSavedCardsQuery,
 } from "@/redux/apis/paymentApi";
 import ArrowBackIosRoundedIcon from "@mui/icons-material/ArrowBackIosRounded";
+import Reviewpurchase from "@/components/Reviewpurchase/Reviewpurchase";
 const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
   if (error) console.log("###ERROR");
   const router = useRouter();
@@ -65,6 +66,7 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
   const [openPricingOptions, setOpenPricingOptions] = useState(false);
   const [storeInspectionQ] = useInspectionReportStoreMutation();
   const [offerDialogOpen, setOfferDialogOpen] = useState(false);
+  const [buyDialogOpen, setBuyDialogOpen] = useState(false);
   const [showSellerOffers, setShowSellerOffers] = useState(false);
   const [makeOfferQ] = useMakeOfferMutation();
   const [dataOffer, setDataOffer] = useState({
@@ -82,7 +84,11 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
     if (user?.deposit?.amount === undefined) router.push("/auth");
     else setOfferDialogOpen(true);
   };
+  const handleOpenBuyDialog = () => {
+    setBuyDialogOpen(true);
+  };
   const handleCloseOfferDialog = () => setOfferDialogOpen(false);
+  const handleCloseBuyDialog = () => setBuyDialogOpen(false);
   const onPayForInspection = () => setOpenPricingOptions(false);
   const enoughBalance =
     user?.deposit?.amount >= auctionDetails?.depositAmount?.amount;
@@ -98,8 +104,9 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
   );
   const [counterOfferQ] = useCounterOfferMutation();
   const getSavedCardsQ = useGetSavedCardsQuery();
-
+  const [switchState, setSwitchState] = useState(false);
   const [openCardsModal, setOpenCardsModal] = useState(false);
+  const [inputValue, setInputValue] = useState("");
   const [selectedCard, setSelectedCard] = useState();
   const [inspectionReportId, setInspectionReportId] = useState();
   const handleToggleCard = (e) => setSelectedCard(e.target.value);
@@ -220,7 +227,10 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
                 open: true,
                 message: res.message,
               }));
-            else router.push(`/checkout?id=${auctionDetails?.id}`);
+            else {
+              handleOpenBuyDialog();
+              // router.push(`/checkout?id=${auctionDetails?.id}`);
+            }
           })
           .catch((e) => {
             console.log(e);
@@ -411,7 +421,7 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
       </Box>
     );
   });
-  // console.log(auctionDetails);
+
   return (
     <>
       <ArrowBackIosRoundedIcon
@@ -909,6 +919,8 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
             component={
               topUpSucces ? (
                 <Congrats
+                  inputValue={inputValue}
+                  switchState={switchState}
                   auctionDetails={auctionDetails}
                   title={`${
                     auctionDetails?.saleType === "sale" ? "Offer" : "Bid"
@@ -919,6 +931,10 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
                 />
               ) : (
                 <TopUp
+                  inputValue={inputValue}
+                  setInputValue={setInputValue}
+                  switchState={switchState}
+                  setSwitchState={setSwitchState}
                   userBalance={user?.deposit}
                   auctionDetails={auctionDetails}
                   handleTopupSuccess={handleTopupSuccess}
@@ -928,6 +944,21 @@ const LotDetails = ({ auctionDetails, category, highestBid, error }) => {
               )
             }
           />
+          {/* buy now */}
+          <CustomDialog
+            type={auctionDetails?.saleType}
+            open={buyDialogOpen}
+            handleClose={handleCloseBuyDialog}
+            component={
+              <Reviewpurchase
+                snackbarState={snackbarState}
+                handleCloseTopupSuccess={handleCloseTopupSuccess}
+                type={auctionDetails?.saleType === "sale" ? "offer" : "bid"}
+                auctionDetails={auctionDetails}
+              />
+            }
+          />
+
           <InspectionPayment
             openPricingOptions={openPricingOptions}
             setOpenPricingOptions={setOpenPricingOptions}

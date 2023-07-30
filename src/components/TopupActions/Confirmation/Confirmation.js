@@ -14,6 +14,7 @@ function Confirmation({
   auctionDetails,
   dataOffer,
   type,
+  inputValue,
 }) {
   const router = useRouter();
   return (
@@ -86,7 +87,7 @@ function Confirmation({
               marginTop: "20px",
             }}
           >
-            {dataOffer?.auctionedPrice?.toLocaleString()}
+            {parseInt(inputValue).toLocaleString()}
           </Typography>
         </Box>
         <Typography
